@@ -3,1251 +3,980 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Miffy Local Hub</title>
+<title>M𝚒𝚏𝚏𝚢 𓆡</title>
 
 <style>
 *{
-  box-sizing:border-box;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html,body{
-  margin:0;
-  padding:0;
-  min-height:100%;
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  color:#57565c;
-  background:#f7f7f8;
-  transition:background 1s ease;
+    font-family:"Trebuchet MS",Arial,sans-serif;
+    color:#675957;
+    min-height:100vh;
+    overflow-x:hidden;
+
+    background:
+        radial-gradient(circle at 15% 20%,rgba(255,255,255,.78),transparent 30%),
+        radial-gradient(circle at 85% 30%,rgba(165,165,165,.38),transparent 32%),
+        radial-gradient(circle at 45% 85%,rgba(255,255,255,.65),transparent 35%),
+        linear-gradient(135deg,#d4d4d4,#bdbdbd,#d5d5d5,#c5c5c5);
+
+    background-size:220% 220%;
+    animation:bgMove 18s ease-in-out infinite alternate;
 }
 
-body.morning{background:#fafafa;}
-body.day{background:#f7f8f8;}
-body.sunset{background:#f9f8f7;}
-body.night{background:#f3f3f5;}
-
-.page{
-  width:94%;
-  max-width:920px;
-  margin:20px auto 50px;
+@keyframes bgMove{
+    0%{background-position:0% 20%}
+    50%{background-position:100% 60%}
+    100%{background-position:25% 100%}
 }
 
-.card{
-  background:#ffffff;
-  border:2px solid #dedee1;
-  border-radius:30px;
-  padding:30px 24px;
-  margin-bottom:28px;
-  box-shadow:0 4px 18px rgba(70,70,80,.05);
+body::before{
+    content:"";
+    position:fixed;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    background:rgba(255,255,255,.36);
+    filter:blur(80px);
+    top:5%;
+    left:-130px;
+    pointer-events:none;
+    animation:glowMove 14s ease-in-out infinite alternate;
 }
 
-.main-heading,
-.section-heading{
-  margin:0 0 25px;
-  text-align:center;
-  white-space:nowrap;
-  line-height:1.05;
-  font-weight:800;
-  color:#59585e;
+@keyframes glowMove{
+    from{transform:translate(0,0)}
+    to{transform:translate(75vw,35vh)}
 }
 
-.main-heading{
-  font-size:clamp(30px,6vw,58px);
+/* SNOW */
+
+.snow{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:20;
 }
 
-.section-heading{
-  font-size:clamp(27px,5vw,48px);
+.flake{
+    position:absolute;
+    top:-30px;
+    color:#fff;
+    animation:fall linear infinite;
 }
 
+@keyframes fall{
+    0%{
+        transform:translateY(-30px) translateX(0);
+        opacity:0;
+    }
 
-/* =========================
-   MEMBER COUNT
-   ========================= */
+    10%{
+        opacity:.95;
+    }
+
+    50%{
+        transform:translateY(55vh) translateX(35px);
+    }
+
+    100%{
+        transform:translateY(110vh) translateX(-35px);
+        opacity:.25;
+    }
+}
+
+.container{
+    width:min(1050px,92%);
+    margin:auto;
+    padding:45px 0 25px;
+    position:relative;
+    z-index:2;
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+    padding:42px 20px 35px;
+}
+
+.miffy-image{
+    width:145px;
+    height:145px;
+    object-fit:contain;
+    display:block;
+    margin:0 auto 18px;
+    filter:drop-shadow(0 8px 12px rgba(90,90,90,.12));
+}
+
+h1{
+    color:#715d59;
+    font-size:clamp(2.3rem,6vw,4.2rem);
+    letter-spacing:2px;
+    margin-bottom:8px;
+}
+
+.established{
+    color:#9a8984;
+    font-size:.95rem;
+    margin-bottom:14px;
+}
+
+.bunny{
+    font-size:1.25rem;
+    margin-bottom:22px;
+}
+
+.intro{
+    max-width:750px;
+    margin:auto;
+    line-height:1.8;
+    font-size:1.02rem;
+    color:#766864;
+}
 
 .member-count{
-  text-align:center;
-  font-size:clamp(48px,10vw,88px);
-  line-height:1;
-  font-weight:900;
-  color:#8d8c92;
-  margin:15px 0;
+    display:inline-block;
+    margin-top:25px;
+    padding:19px 40px;
+    border-radius:35px;
+    background:#fffbea;
+    color:#c8b97a;
+    border:1px solid #f3e9b8;
+    box-shadow:0 8px 24px rgba(190,175,100,.10);
+    font-weight:bold;
+    font-size:2rem;
+    letter-spacing:1.2px;
+    white-space:nowrap;
 }
 
-.sub-title{
-  text-align:center;
-  font-size:clamp(17px,3vw,26px);
-  font-weight:800;
-  letter-spacing:2px;
-  color:#aaa9ae;
+.newest-members{
+    margin:20px auto 0;
+    max-width:520px;
+    text-align:center;
 }
 
-.status{
-  min-height:20px;
-  margin-top:10px;
-  text-align:center;
-  color:#aaa9ae;
-  font-size:14px;
+.newest-title{
+    color:#9a8984;
+    font-size:1.15rem;
+    font-weight:bold;
+    margin-bottom:12px;
 }
 
-
-/* =========================
-   NEWEST MEMBERS
-   ========================= */
-
-.members-list{
-  display:grid;
-  gap:18px;
+.newest-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
 }
 
-.member{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  min-height:92px;
-  padding:19px 22px;
-  background:#f8f8f9;
-  border:2px solid #dedee1;
-  border-radius:24px;
+.newest-member{
+    background:#f7f1f2;
+    border:1px solid #eee1e4;
+    border-radius:16px;
+    padding:11px 15px;
+    color:#766864;
+    font-weight:bold;
 }
 
-.member-number{
-  flex:0 0 54px;
-  width:54px;
-  height:54px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  background:#e9e9ec;
-  color:#77767d;
-  font-size:25px;
-  font-weight:800;
-}
+/* CALENDAR */
 
-.member-name{
-  min-width:0;
-  overflow-wrap:anywhere;
-  color:#5e5d64;
-  font-size:clamp(19px,4vw,29px);
-  font-weight:800;
-}
-
-.member-date{
-  margin-left:auto;
-  color:#aaa9ae;
-  font-size:14px;
-  white-space:nowrap;
-}
-
-.api-status{
-  color:#aaa9ae;
-}
-
-
-/* =========================
-   CALENDAR
-   ========================= */
-
-.local-card{
-  padding-bottom:28px;
-}
-
-.calendar-wrap{
-  border:2px solid #dedee1;
-  border-radius:28px;
-  padding:18px;
-  background:#fbfbfc;
+.calendar-section{
+    margin:22px auto 0;
+    max-width:620px;
+    padding:22px;
+    border-radius:24px;
+    background:#f8f5f2;
+    border:1px solid #e9e2de;
+    box-shadow:0 8px 24px rgba(90,90,90,.06);
 }
 
 .calendar-header{
-  display:grid;
-  grid-template-columns:52px 1fr 52px;
-  align-items:center;
-  gap:12px;
-}
-
-.month-button{
-  width:52px;
-  height:52px;
-  border:2px solid #dedee1;
-  border-radius:50%;
-  background:#ffffff;
-  color:#77767d;
-  font-size:30px;
-  line-height:1;
-  cursor:pointer;
-}
-
-.month-button:active{
-  transform:scale(.95);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:12px;
 }
 
 .calendar-month{
-  text-align:center;
-  color:#66656b;
-  font-size:clamp(20px,4vw,32px);
-  font-weight:800;
-  white-space:nowrap;
+    flex:1;
+    text-align:center;
+    color:#88736d;
+    font-size:1.3rem;
+    font-weight:bold;
 }
 
-.weekdays,
+.calendar-button{
+    width:40px;
+    height:40px;
+    border:0;
+    border-radius:50%;
+    background:#eee9e5;
+    color:#776963;
+    font-size:1.25rem;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.calendar-button:hover{
+    background:#e5dfdb;
+    transform:scale(1.05);
+}
+
+/* VISITOR INFO */
+
+.calendar-location{
+    text-align:center;
+    margin:0 0 18px;
+    color:#9a8984;
+    font-size:.88rem;
+    line-height:1.8;
+}
+
+.calendar-location div{
+    display:block;
+}
+
+.calendar-weekdays,
 .calendar-days{
-  display:grid;
-  grid-template-columns:repeat(7,minmax(0,1fr));
+    display:grid;
+    grid-template-columns:repeat(7,minmax(0,1fr));
+    gap:6px;
 }
 
-.weekdays{
-  margin-top:24px;
-}
-
-.weekdays div{
-  padding:7px 0;
-  text-align:center;
-  color:#aaa9ae;
-  font-size:clamp(12px,2.5vw,17px);
-  font-weight:800;
-}
-
-.calendar-days{
-  margin-top:8px;
-  row-gap:8px;
+.calendar-weekday{
+    text-align:center;
+    color:#a18e88;
+    font-size:.78rem;
+    font-weight:bold;
+    padding:7px 2px;
 }
 
 .calendar-day{
-  height:46px;
-  min-width:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#65646a;
-  font-size:clamp(14px,3vw,18px);
-  font-weight:700;
+    aspect-ratio:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-width:0;
+    border-radius:50%;
+    color:#756763;
+    font-size:.9rem;
 }
 
 .calendar-day.empty{
-  visibility:hidden;
+    visibility:hidden;
 }
 
-.calendar-day.today span{
-  width:42px;
-  height:42px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  background:#e2e2e5;
-  color:#55545a;
-  font-weight:900;
+.calendar-day.today{
+    background:#e5e1e7;
+    color:#655c67;
+    font-weight:bold;
+    box-shadow:0 3px 10px rgba(100,90,100,.08);
 }
 
-
-/* =========================
-   LOCAL TIME
-   ========================= */
-
-.local-time{
-  margin-top:28px;
-  text-align:center;
-  color:#5c5b62;
-  font-size:clamp(38px,9vw,70px);
-  font-weight:900;
-  line-height:1;
+.decor{
+    text-align:center;
+    color:#967e78;
+    margin:28px 0;
+    line-height:2;
+    font-size:1.05rem;
 }
 
-.local-date{
-  margin-top:12px;
-  text-align:center;
-  color:#88878d;
-  font-size:clamp(17px,3vw,25px);
-  font-weight:700;
-}
+/* SECTIONS */
 
-.location-info{
-  display:grid;
-  gap:10px;
-  margin-top:22px;
-}
-
-.location-row{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:9px;
-  text-align:center;
-  color:#77767d;
-  font-size:clamp(14px,2.8vw,18px);
-  font-weight:700;
-}
-
-.location-icon{
-  color:#99989e;
-}
-
-
-/* =========================
-   MOBILE
-   ========================= */
-
-@media(max-width:520px){
-
-  .page{
-    width:94%;
-    margin-top:12px;
-  }
-
-  .card{
-    padding:25px 15px;
+.section{
+    background:rgba(255,255,255,.88);
+    border:1px solid rgba(220,220,218,.95);
     border-radius:27px;
-  }
+    padding:30px;
+    margin:28px 0;
+    box-shadow:0 12px 35px rgba(90,90,90,.08);
+    backdrop-filter:blur(7px);
+}
 
-  .member{
-    min-height:88px;
-    padding:17px 15px;
+.section-title{
+    text-align:center;
+    color:#b3a29e;
+    font-size:clamp(1.8rem,6vw,2.5rem);
+    margin-bottom:28px;
+    letter-spacing:.3px;
+    white-space:nowrap;
+    line-height:1.2;
+    font-weight:bold;
+}
+
+.about-title{
+    white-space:normal !important;
+    line-height:1.15;
+}
+
+.about-title .about-name{
+    display:block;
+    white-space:nowrap;
+}
+
+.about-title .about-bunny{
+    display:block;
+    margin-top:12px;
+    font-size:1.35rem;
+    color:#a98f88;
+    white-space:nowrap;
+}
+
+/* OWNER */
+
+.owner{
+    text-align:center;
+}
+
+.owner strong{
+    display:block;
+    color:#705c58;
+    font-size:1.45rem;
+}
+
+/* MILESTONES */
+
+.milestones{
+    display:flex;
+    flex-direction:column;
+    gap:26px;
+}
+
+.milestone{
+    min-height:145px;
+    padding:24px 20px;
+    border-radius:32px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    border:1px solid rgba(255,255,255,.8);
+    box-shadow:0 7px 20px rgba(80,80,80,.055);
+    position:relative;
+    overflow:hidden;
+}
+
+.milestone::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at 12% 25%,rgba(255,255,255,.6) 0 2px,transparent 3px),
+        radial-gradient(circle at 85% 75%,rgba(255,255,255,.55) 0 2px,transparent 3px),
+        radial-gradient(circle at 25% 85%,rgba(255,255,255,.5) 0 1.5px,transparent 2.5px);
+    pointer-events:none;
+}
+
+.milestone strong,
+.milestone small{
+    position:relative;
+    z-index:1;
+}
+
+.milestone strong{
+    font-size:2.3rem;
+    margin-bottom:9px;
+    font-weight:bold;
+}
+
+.milestone small{
+    font-size:1.15rem;
+}
+
+.milestone.green{
+    background:#e4f3e5;
+    color:#477b4e;
+}
+
+.milestone.red{
+    background:#f8e1e1;
+    color:#a94b4b;
+}
+
+/* TITLED PLAYER */
+
+.player-info{
+    text-align:center;
+    padding:25px;
+    border-radius:22px;
+    background:#edf3f8;
+    border:1px solid #dce7ef;
+}
+
+.player-info .name{
+    color:#617788;
+    font-size:1.5rem;
+    font-weight:bold;
+}
+
+/* ABOUT MIFFY */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.info-card{
+    padding:23px;
+    border-radius:21px;
+    line-height:1.75;
+    background:#fff8f5;
+    border:1px solid #f0ded7;
+    color:#766663;
+    font-size:1rem;
+}
+
+.info-card:nth-child(2){
+    background:#f3f7ef;
+    border-color:#dfe9d8;
+}
+
+/* AESTHETIC */
+
+.aesthetic{
+    text-align:center;
+}
+
+.aesthetic-subdecor{
+    font-size:1.35rem;
+    letter-spacing:4px;
+    margin:0 0 22px;
+    color:#a98f88;
+}
+
+.aesthetic-content{
+    background:#fff8f5;
+    border:1px solid #f0ded7;
+    border-radius:23px;
+    padding:28px 25px;
+    box-shadow:0 7px 22px rgba(90,90,90,.055);
+}
+
+.aesthetic-text{
+    text-align:left;
+    color:#766663;
+    font-size:1.05rem;
+    line-height:1.95;
+}
+
+.aesthetic-text + .aesthetic-text{
+    margin-top:20px;
+}
+
+.aesthetic-bottom{
+    margin-top:42px;
+    font-size:1.35rem;
+    line-height:2;
+    color:#a98f88;
+    letter-spacing:3px;
+}
+
+/* FEATURES */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.feature{
+    padding:22px 17px;
+    border-radius:20px;
+    text-align:center;
+    line-height:1.55;
+}
+
+.feature:nth-child(1){
+    background:#f9e7eb;
+    color:#8b626c;
+}
+
+.feature:nth-child(2){
+    background:#e8f2e8;
+    color:#607b63;
+}
+
+.feature:nth-child(3){
+    background:#e7eff7;
+    color:#62788e;
+}
+
+.feature:nth-child(4){
+    background:#eee8f6;
+    color:#756b83;
+}
+
+.feature:nth-child(5){
+    background:#faf0df;
+    color:#8a7557;
+}
+
+.feature strong{
+    display:block;
+    margin-bottom:7px;
+}
+
+/* SWEETS */
+
+.sweets{
+    display:grid;
+    grid-template-columns:1fr 1fr;
     gap:13px;
-  }
+}
 
-  .member-number{
-    flex-basis:48px;
-    width:48px;
-    height:48px;
-    font-size:21px;
-  }
+.sweet{
+    min-height:75px;
+    display:flex;
+    align-items:center;
+    padding:17px 18px;
+    border-radius:18px;
+    font-weight:bold;
+    color:#71635f;
+    border:1px solid rgba(255,255,255,.9);
+    box-shadow:0 4px 13px rgba(100,90,80,.055);
+}
 
-  .member-date{
-    display:none;
-  }
+.sweet:nth-child(7n+1){background:#f9e5e8}
+.sweet:nth-child(7n+2){background:#e6f1e7}
+.sweet:nth-child(7n+3){background:#e5eef8}
+.sweet:nth-child(7n+4){background:#eee8f7}
+.sweet:nth-child(7n+5){background:#f9efd9}
+.sweet:nth-child(7n+6){background:#e9f3ef}
+.sweet:nth-child(7n){background:#f4e8e2}
 
-  .calendar-wrap{
-    padding:12px 8px;
-  }
+/* FOOTER */
 
-  .calendar-header{
-    grid-template-columns:46px 1fr 46px;
-    gap:8px;
-  }
+.footer{
+    text-align:center;
+    padding:35px 10px 20px;
+    color:#958681;
+    line-height:2;
+}
 
-  .month-button{
-    width:46px;
-    height:46px;
-    font-size:27px;
-  }
+.footer-decor{
+    font-size:1.15rem;
+    margin-bottom:10px;
+}
 
-  .calendar-day{
-    height:42px;
-  }
+/* MOBILE */
 
-  .calendar-day.today span{
-    width:38px;
-    height:38px;
-  }
+@media(max-width:700px){
+
+    .container{
+        width:94%;
+        padding-top:25px;
+    }
+
+    .hero{
+        padding-top:30px;
+    }
+
+    .miffy-image{
+        width:125px;
+        height:125px;
+    }
+
+    .section{
+        padding:22px 17px;
+        border-radius:25px;
+    }
+
+    .section-title{
+        font-size:clamp(1.55rem,7vw,2rem);
+    }
+
+    .about-title{
+        font-size:clamp(1.55rem,7vw,2rem);
+    }
+
+    .about-title .about-bunny{
+        font-size:1.25rem;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .milestone{
+        min-height:140px;
+    }
+
+    .milestone strong{
+        font-size:2.15rem;
+    }
+
+    .milestone small{
+        font-size:1.05rem;
+    }
+
+    .sweets{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .sweet{
+        padding:14px 12px;
+        font-size:.88rem;
+        min-height:68px;
+    }
+
+    .member-count{
+        font-size:1.7rem;
+        padding:17px 32px;
+        white-space:nowrap;
+    }
+
+    .aesthetic-content{
+        padding:22px 17px;
+    }
+
+    .calendar-section{
+        padding:17px 12px;
+    }
+
+    .calendar-weekdays,
+    .calendar-days{
+        gap:3px;
+    }
+
+    .calendar-day{
+        font-size:.82rem;
+    }
+
+}
+
+@media(max-width:420px){
+
+    .section-title{
+        font-size:clamp(1.28rem,6.2vw,1.7rem);
+        letter-spacing:0;
+    }
+
+    .about-title{
+        font-size:1.55rem;
+    }
+
+    .about-title .about-name{
+        white-space:nowrap;
+    }
+
+    .about-title .about-bunny{
+        font-size:1.12rem;
+        margin-top:10px;
+    }
+
+    .sweets{
+        gap:8px;
+    }
+
+    .sweet{
+        font-size:.78rem;
+        padding:12px 9px;
+    }
+
+    .aesthetic-text{
+        font-size:1rem;
+    }
+
+    .member-count{
+        font-size:1.5rem;
+        padding:16px 27px;
+        white-space:nowrap;
+    }
+
+    .calendar-month{
+        font-size:1.05rem;
+    }
+
+    .calendar-button{
+        width:36px;
+        height:36px;
+        font-size:1.1rem;
+    }
+
 }
 </style>
 </head>
 
 <body>
 
-<div class="page">
-
-  <!-- =========================
-       MEMBER COUNT
-       ========================= -->
-
-  <section class="card">
-
-    <h1 class="main-heading">
-      ✨ Miffy Members ✨
-    </h1>
-
-    <div id="memberCount" class="member-count">
-      Loading...
-    </div>
-
-    <div class="sub-title">
-      LIVE CLUB DATA
-    </div>
-
-    <div id="memberStatus" class="status">
-      Connecting to Chess.com...
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       NEWEST MEMBERS
-       ========================= -->
-
-  <section class="card">
-
-    <h2 class="section-heading">
-      🌱 Newest Members 🌱
-    </h2>
-
-    <div id="membersList" class="members-list">
-
-      <div class="member">
-        <div class="member-number">1</div>
-        <div class="member-name">Loading...</div>
-      </div>
-
-      <div class="member">
-        <div class="member-number">2</div>
-        <div class="member-name">Loading...</div>
-      </div>
-
-      <div class="member">
-        <div class="member-number">3</div>
-        <div class="member-name">Loading...</div>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       LOCAL TIME
-       COMPLETELY INDEPENDENT
-       ========================= -->
-
-  <section class="card local-card">
-
-    <h2 class="section-heading">
-      🌙 LOCAL TIME 🌙
-    </h2>
-
-    <div class="calendar-wrap">
-
-      <div class="calendar-header">
-
-        <button
-          class="month-button"
-          id="prevMonth"
-          type="button">
-          ‹
-        </button>
-
-        <div
-          class="calendar-month"
-          id="calendarMonth">
-        </div>
-
-        <button
-          class="month-button"
-          id="nextMonth"
-          type="button">
-          ›
-        </button>
-
-      </div>
-
-
-      <div class="weekdays">
-        <div>Sun</div>
-        <div>Mon</div>
-        <div>Tue</div>
-        <div>Wed</div>
-        <div>Thu</div>
-        <div>Fri</div>
-        <div>Sat</div>
-      </div>
-
-
-      <div
-        class="calendar-days"
-        id="calendarDays">
-      </div>
-
-    </div>
-
-
-    <div
-      id="localTime"
-      class="local-time">
-    </div>
-
-    <div
-      id="localDate"
-      class="local-date">
-    </div>
-
-
-    <div class="location-info">
-
-      <div class="location-row">
-        <span class="location-icon">🌍</span>
-        <span id="country"></span>
-      </div>
-
-      <div class="location-row">
-        <span class="location-icon">📍</span>
-        <span id="area"></span>
-      </div>
-
-      <div class="location-row">
-        <span class="location-icon">🕐</span>
-        <span id="timezone"></span>
-      </div>
-
-    </div>
-
-  </section>
-
+<div class="snow" aria-hidden="true">
+    <span class="flake" style="left:2%;font-size:16px;animation-duration:13s;animation-delay:-4s;">•</span>
+    <span class="flake" style="left:8%;font-size:25px;animation-duration:18s;animation-delay:-8s;">❄</span>
+    <span class="flake" style="left:14%;font-size:13px;animation-duration:11s;animation-delay:-2s;">•</span>
+    <span class="flake" style="left:20%;font-size:21px;animation-duration:16s;animation-delay:-10s;">❅</span>
+    <span class="flake" style="left:26%;font-size:31px;animation-duration:20s;animation-delay:-6s;">❄</span>
+    <span class="flake" style="left:32%;font-size:15px;animation-duration:12s;animation-delay:-9s;">•</span>
+    <span class="flake" style="left:38%;font-size:22px;animation-duration:17s;animation-delay:-3s;">❅</span>
+    <span class="flake" style="left:44%;font-size:12px;animation-duration:10s;animation-delay:-7s;">•</span>
+    <span class="flake" style="left:50%;font-size:28px;animation-duration:19s;animation-delay:-13s;">❄</span>
+    <span class="flake" style="left:56%;font-size:18px;animation-duration:14s;animation-delay:-5s;">❅</span>
+    <span class="flake" style="left:62%;font-size:34px;animation-duration:21s;animation-delay:-11s;">❄</span>
+    <span class="flake" style="left:68%;font-size:15px;animation-duration:13s;animation-delay:-1s;">•</span>
+    <span class="flake" style="left:74%;font-size:27px;animation-duration:17s;animation-delay:-6s;">❅</span>
+    <span class="flake" style="left:80%;font-size:16px;animation-duration:12s;animation-delay:-4s;">•</span>
+    <span class="flake" style="left:85%;font-size:34px;animation-duration:20s;animation-delay:-14s;">❄</span>
+    <span class="flake" style="left:90%;font-size:18px;animation-duration:15s;animation-delay:-8s;">❅</span>
+    <span class="flake" style="left:95%;font-size:15px;animation-duration:11s;animation-delay:-3s;">•</span>
+    <span class="flake" style="left:98%;font-size:27px;animation-duration:18s;animation-delay:-10s;">❄</span>
 </div>
 
+<main class="container">
 
-<!-- =====================================================
-     SCRIPT 1
-     LOCAL FEATURES ONLY
+    <section class="hero">
 
-     This script has NO Chess.com API.
-     It runs independently.
-     ===================================================== -->
+        <img
+            src="miffy-transparent.png"
+            alt="Miffy"
+            class="miffy-image"
+        >
 
-<script>
+        <h1>M𝚒𝚏𝚏𝚢 𓆡</h1>
 
-(function(){
+        <div class="established">
+            Est. March 15th, 2026
+        </div>
 
-  var monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
+        <div class="bunny">
+            🤍 ૮꒰ • ༝ • ꒱ა 🤍
+        </div>
 
-  var calendarDate = new Date();
+        <p class="intro">
+            Grab your milk tea and get comfy — welcome to the Miffy Club! Your Miffy adventure starts here.
+            <br><br>
+            Plz invite your friends so that we could start playing more tournaments and have a more cozyyy community!
+        </p>
 
+        <div id="memberCount" class="member-count">
+            ✨ Loading Members... ✨
+        </div>
 
-  /* =========================
-     CALENDAR
-     ========================= */
+        <div class="newest-members">
 
-  function renderCalendar(){
+            <div class="newest-title">
+                Newest Members
+            </div>
 
-    var year = calendarDate.getFullYear();
-    var month = calendarDate.getMonth();
+            <div class="newest-list">
 
-    var monthElement =
-      document.getElementById("calendarMonth");
+                <div class="newest-member" id="newest1">
+                    Loading...
+                </div>
 
-    var daysElement =
-      document.getElementById("calendarDays");
+                <div class="newest-member" id="newest2">
+                    Loading...
+                </div>
 
-    if(!monthElement || !daysElement){
-      return;
-    }
+                <div class="newest-member" id="newest3">
+                    Loading...
+                </div>
 
-    monthElement.textContent =
-      monthNames[month] + " " + year;
+            </div>
 
-    daysElement.innerHTML = "";
+        </div>
 
+        <div class="calendar-section">
 
-    var firstDay =
-      new Date(year,month,1).getDay();
+            <div class="calendar-header">
 
-    var daysInMonth =
-      new Date(year,month + 1,0).getDate();
+                <button
+                    class="calendar-button"
+                    id="previousMonth"
+                    type="button"
+                    aria-label="Previous month"
+                >
+                    ‹
+                </button>
 
+                <div
+                    class="calendar-month"
+                    id="calendarMonth"
+                ></div>
 
-    var today = new Date();
+                <button
+                    class="calendar-button"
+                    id="nextMonth"
+                    type="button"
+                    aria-label="Next month"
+                >
+                    ›
+                </button>
 
+            </div>
 
-    /* Empty cells */
-    for(var i = 0; i < firstDay; i++){
+            <div class="calendar-location">
 
-      var empty =
-        document.createElement("div");
+                <div id="visitorTime">
+                    Time: Loading...
+                </div>
 
-      empty.className =
-        "calendar-day empty";
+                <div id="visitorCountry">
+                    Country: Loading...
+                </div>
 
-      empty.innerHTML =
-        "<span>0</span>";
+                <div id="visitorArea">
+                    Area: Loading...
+                </div>
 
-      daysElement.appendChild(empty);
-    }
+            </div>
 
+            <div class="calendar-weekdays">
 
-    /* Dates */
-    for(var day = 1; day <= daysInMonth; day++){
+                <div class="calendar-weekday">Sun</div>
+                <div class="calendar-weekday">Mon</div>
+                <div class="calendar-weekday">Tue</div>
+                <div class="calendar-weekday">Wed</div>
+                <div class="calendar-weekday">Thu</div>
+                <div class="calendar-weekday">Fri</div>
+                <div class="calendar-weekday">Sat</div>
 
-      var cell =
-        document.createElement("div");
+            </div>
 
-      cell.className =
-        "calendar-day";
+            <div
+                class="calendar-days"
+                id="calendarDays"
+            ></div>
 
+        </div>
 
-      var isToday =
-        day === today.getDate() &&
-        month === today.getMonth() &&
-        year === today.getFullYear();
+    </section>
 
+    <div class="decor">
+        ₊˚.🎧 ✩。☕ 🤎
+        <br>
+        𓆝 𓆟 𓆞 𖥔 ݁˖𓆝 𓆟 𓆞𓆝⋆⭒˚.𓆞
+    </div>
 
-      if(isToday){
-        cell.className += " today";
-      }
+    <section class="section owner">
 
+        <h2 class="section-title">
+            𐙚 Owner 𐙚
+        </h2>
 
-      var span =
-        document.createElement("span");
+        <strong>👑 Yoghurt_22 👑</strong>
 
-      span.textContent = day;
+    </section>
 
-      cell.appendChild(span);
+    <section class="section">
 
-      daysElement.appendChild(cell);
-    }
-  }
+        <h2 class="section-title">
+            🌱 𐙚 Member Milestones 𐙚 🌱
+        </h2>
 
+        <div class="milestones">
 
-  /* =========================
-     CALENDAR BUTTONS
-     ========================= */
+            <div class="milestone green">
+                <strong>10</strong>
+                <small>🌱 First Steps 🌱</small>
+            </div>
 
-  document
-    .getElementById("prevMonth")
-    .onclick = function(){
+            <div class="milestone green">
+                <strong>50</strong>
+                <small>🌿 Growing Club 🌿</small>
+            </div>
 
-      calendarDate.setMonth(
-        calendarDate.getMonth() - 1
-      );
+            <div class="milestone green">
+                <strong>100</strong>
+                <small>🌳 Century Club 🌳</small>
+            </div>
 
-      renderCalendar();
-    };
+            <div class="milestone green">
+                <strong>200</strong>
+                <small>⭐ Miffy Community ⭐</small>
+            </div>
 
+            <div class="milestone red">
+                <strong>500</strong>
+                <small>🔥 Big Club 🔥</small>
+            </div>
 
-  document
-    .getElementById("nextMonth")
-    .onclick = function(){
+            <div class="milestone red">
+                <strong>1000</strong>
+                <small>👑 Miffy Kingdom 👑</small>
+            </div>
 
-      calendarDate.setMonth(
-        calendarDate.getMonth() + 1
-      );
+        </div>
 
-      renderCalendar();
-    };
+    </section>
 
+    <div class="decor">
+        ⊹ ﹏𓊝﹏𓂁﹏⊹ ˖
+    </div>
 
-  /* =========================
-     TIMEZONE COUNTRY
-     ========================= */
+    <section class="section">
 
-  var countryMap = {
+        <h2 class="section-title">
+            ♟ 𐙚 Titled Player in Club 𐙚 ♟
+        </h2>
 
-    "Asia/Kolkata":"India",
-    "Asia/Calcutta":"India",
+        <div class="player-info">
+            <div class="name">
+                IM Chanelinmyysl
+            </div>
+        </div>
 
-    "Asia/Dhaka":"Bangladesh",
-    "Asia/Kathmandu":"Nepal",
-    "Asia/Karachi":"Pakistan",
-    "Asia/Colombo":"Sri Lanka",
+    </section>
 
-    "Asia/Tokyo":"Japan",
-    "Asia/Seoul":"South Korea",
-    "Asia/Shanghai":"China",
-    "Asia/Hong_Kong":"Hong Kong",
-    "Asia/Singapore":"Singapore",
-    "Asia/Bangkok":"Thailand",
-    "Asia/Jakarta":"Indonesia",
-    "Asia/Manila":"Philippines",
+    <section class="section">
 
-    "Europe/London":"United Kingdom",
-    "Europe/Paris":"France",
-    "Europe/Berlin":"Germany",
-    "Europe/Rome":"Italy",
-    "Europe/Madrid":"Spain",
+        <h2 class="section-title about-title">
 
-    "America/New_York":"United States",
-    "America/Chicago":"United States",
-    "America/Denver":"United States",
-    "America/Los_Angeles":"United States",
+            <span class="about-name">
+                About Miffy
+            </span>
 
-    "America/Toronto":"Canada",
-    "America/Vancouver":"Canada",
+            <span class="about-bunny">
+                🤍 ૮꒰ • ༝ • ꒱ა 🤍
+            </span>
 
-    "Australia/Sydney":"Australia",
-    "Australia/Melbourne":"Australia",
+        </h2>
 
-    "Pacific/Auckland":"New Zealand"
-  };
+        <div class="info-grid">
 
+            <div class="info-card">
+                Miffy is a little white rabbit created by Dutch artist Dick Bruna.
+                She is known for her simple design, tiny dot eyes, cross-shaped mouth,
+                and calm, cozy style. Her minimal appearance has made her one of the
+                most recognizable characters in children's illustration.
+            </div>
 
-  function getCountry(timezone){
+            <div class="info-card">
+                The Miffy aesthetic is soft, simple, playful, and comforting.
+                Clean shapes, gentle colors, cute decorations, cozy objects,
+                and little everyday moments all fit naturally into the world of Miffy.
+                That's the feeling we want our club to have too.
+            </div>
 
-    if(countryMap[timezone]){
-      return countryMap[timezone];
-    }
+        </div>
 
-    return "Local region";
-  }
+    </section>
 
+    <section class="section aesthetic">
 
-  function getArea(timezone){
+        <h2 class="section-title">
+            ✧˚‧⁺˖ Aesthetic ˖⁺‧˚✧
+        </h2>
 
-    var parts =
-      timezone.split("/");
+        <div class="aesthetic-subdecor">
+            ★｡° 🐚🫧𓇼✧ °｡★
+        </div>
 
-    if(parts.length > 1){
+        <div class="aesthetic-content">
 
-      return parts
-        .slice(1)
-        .join(" / ")
-        .replace(/_/g," ");
-    }
+            <div class="aesthetic-text">
 
-    return "Local area";
-  }
-
-
-  /* =========================
-     TIME THEME
-     ========================= */
-
-  function getTheme(hour){
-
-    if(hour >= 5 && hour < 8){
-      return "morning";
-    }
-
-    if(hour >= 8 && hour < 17){
-      return "day";
-    }
-
-    if(hour >= 17 && hour < 20){
-      return "sunset";
-    }
-
-    return "night";
-  }
-
-
-  /* =========================
-     LOCAL CLOCK
-     ========================= */
-
-  function updateLocalInfo(){
-
-    var now = new Date();
-
-
-    var timezone =
-      Intl.DateTimeFormat()
-        .resolvedOptions()
-        .timeZone || "Local timezone";
-
-
-    var hour =
-      now.getHours();
-
-
-    document.body.className =
-      getTheme(hour);
-
-
-    document.getElementById("localTime").textContent =
-      now.toLocaleTimeString([],{
-        hour:"numeric",
-        minute:"2-digit",
-        second:"2-digit"
-      });
-
-
-    document.getElementById("localDate").textContent =
-      now.toLocaleDateString([],{
-        weekday:"long",
-        year:"numeric",
-        month:"long",
-        day:"numeric"
-      });
-
-
-    document.getElementById("country").textContent =
-      getCountry(timezone);
-
-
-    document.getElementById("area").textContent =
-      getArea(timezone);
-
-
-    document.getElementById("timezone").textContent =
-      timezone;
-  }
-
-
-  /* =========================
-     START LOCAL FEATURES NOW
-     ========================= */
-
-  renderCalendar();
-
-  updateLocalInfo();
-
-  setInterval(
-    updateLocalInfo,
-    1000
-  );
-
-})();
-
-</script>
-
-
-<!-- =====================================================
-     SCRIPT 2
-     CHESS.COM API ONLY
-
-     If this script/API fails, the calendar,
-     clock and timezone above are already running.
-     ===================================================== -->
-
-<script>
-
-(function(){
-
-  var CLUB = "miffy-1";
-
-
-  /* =========================
-     JSONP REQUEST
-     ========================= */
-
-  function chessJSONP(url,done,failed){
-
-    var name =
-      "miffyCallback_" +
-      Date.now() +
-      "_" +
-      Math.floor(
-        Math.random() * 100000
-      );
-
-
-    var script =
-      document.createElement("script");
-
-
-    var finished = false;
-
-
-    function cleanup(){
-
-      if(script.parentNode){
-        script.parentNode.removeChild(script);
-      }
-
-      try{
-        delete window[name];
-      }catch(e){
-        window[name] = null;
-      }
-    }
-
-
-    var timer =
-      setTimeout(function(){
-
-        if(finished){
-          return;
-        }
-
-        finished = true;
-
-        cleanup();
-
-        if(failed){
-          failed(
-            new Error("API timeout")
-          );
-        }
-
-      },15000);
-
-
-    window[name] =
-      function(data){
-
-        if(finished){
-          return;
-        }
-
-        finished = true;
-
-        clearTimeout(timer);
-
-        cleanup();
-
-        if(done){
-          done(data);
-        }
-      };
-
-
-    script.onerror =
-      function(){
-
-        if(finished){
-          return;
-        }
-
-        finished = true;
-
-        clearTimeout(timer);
-
-        cleanup();
-
-        if(failed){
-          failed(
-            new Error(
-              "Chess.com API request failed"
-            )
-          );
-        }
-      };
-
-
-    script.src =
-      url +
-      "?callback=" +
-      encodeURIComponent(name);
-
-
-    document.head.appendChild(script);
-  }
-
-
-  /* =========================
-     MEMBER COUNT
-     ========================= */
-
-  function loadMemberCount(){
-
-    var count =
-      document.getElementById("memberCount");
-
-    var status =
-      document.getElementById("memberStatus");
-
-
-    chessJSONP(
-
-      "https://api.chess.com/pub/club/" + CLUB,
-
-      function(data){
-
-        if(
-          data &&
-          typeof data.members_count === "number"
-        ){
-
-          count.textContent =
-            data.members_count.toLocaleString();
-
-          status.textContent =
-            "Updated from Chess.com";
-
-        }else{
-
-          count.textContent =
-            "Unavailable";
-
-          status.textContent =
-            "Member count unavailable";
-        }
-      },
-
-      function(){
-
-        count.textContent =
-          "Unavailable";
-
-        status.textContent =
-          "Chess.com data unavailable";
-      }
-    );
-  }
-
-
-  /* =========================
-     NEWEST MEMBERS
-     ========================= */
-
-  function joinedDate(timestamp){
-
-    if(!timestamp){
-      return "";
-    }
-
-    var date =
-      new Date(timestamp * 1000);
-
-    if(isNaN(date.getTime())){
-      return "";
-    }
-
-    return date.toLocaleDateString([],{
-      year:"numeric",
-      month:"short",
-      day:"numeric"
-    });
-  }
-
-
-  function showMemberError(){
-
-    var list =
-      document.getElementById("membersList");
-
-    list.innerHTML = "";
-
-
-    for(var i = 1; i <= 3; i++){
-
-      var row =
-        document.createElement("div");
-
-      row.className =
-        "member";
-
-
-      var number =
-        document.createElement("div");
-
-      number.className =
-        "member-number";
-
-      number.textContent = i;
-
-
-      var name =
-        document.createElement("div");
-
-      name.className =
-        "member-name api-status";
-
-      name.textContent =
-        "Unavailable";
-
-
-      row.appendChild(number);
-      row.appendChild(name);
-
-      list.appendChild(row);
-    }
-  }
-
-
-  function loadNewestMembers(){
-
-    var list =
-      document.getElementById("membersList");
-
-
-    chessJSONP(
-
-      "https://api.chess.com/pub/club/" +
-      CLUB +
-      "/members",
-
-      function(data){
-
-        var all = [];
-
-        var groups = [
-          data && data.weekly,
-          data && data.monthly,
-          data && data.all_time
-        ];
-
-
-        for(
-          var g = 0;
-          g < groups.length;
-          g++
-        ){
-
-          var group =
-            groups[g];
-
-          if(!Array.isArray(group)){
-            continue;
-          }
-
-
-          for(
-            var i = 0;
-            i < group.length;
-            i++
-          ){
-
-            var member =
-              group[i];
-
-
-            if(
-              member &&
-              member.username &&
-              typeof member.joined === "number"
-            ){
-
-              all.push(member);
-            }
-          }
-        }
-
-
-        /* Remove duplicates */
-        var unique = {};
-
-
-        for(
-          var j = 0;
-          j < all.length;
-          j++
-        ){
-
-          var m =
-            all[j];
-
-          var key =
-            String(m.username).toLowerCase();
-
-
-          if(
-            !unique[key] ||
-            m.joined > unique[key].joined
-          ){
-
-            unique[key] = m;
-          }
-        }
-
-
-        var newest =
-          Object.keys(unique)
-            .map(function(key){
-              return unique[key];
-            })
-            .sort(function(a,b){
-              return b.joined - a.joined;
-            })
-            .slice(0,3);
-
-
-        if(newest.length === 0){
-
-          showMemberError();
-
-          return;
-        }
-
-
-        list.innerHTML = "";
-
-
-        for(
-          var n = 0;
-          n < newest.length;
-          n++
-        ){
-
-          var person =
-            newest[n];
-
-
-          var row =
-            document.createElement("div");
-
-          row.className =
-            "member";
-
-
-          var number =
-            document.createElement("div");
-
-          number.className =
-            "member-number";
-
-          number.textContent =
-            n + 1;
-
-
-          var name =
-            document.createElement("div");
-
-          name.className =
-            "member-name";
-
-          name.textContent =
-            person.username;
-
-
-          var date =
-            document.createElement("div");
-
-          date.className =
-            "member-date";
-
-          date.textContent =
-            joinedDate(person.joined);
-
-
-          row.appendChild(number);
-          row.appendChild(name);
-          row.appendChild(date);
-
-          list.appendChild(row);
-        }
-
-      },
-
-      function(){
-
-        showMemberError();
-
-      }
-    );
-  }
-
-
-  /* =========================
-     START API AFTER LOCAL PAGE
-     ========================= */
-
-  setTimeout(function(){
-
-    loadMemberCount();
-
-    /*
-      Second API request starts slightly later.
-      This keeps requests from being parallel.
-    */
-
-    setTimeout(function(){
-      loadNewestMembers();
-    },1000);
-
-  },300);
-
-
-  /*
-    Refresh API sections every 5 minutes.
-
-    The calendar/time never depends on this.
-  */
-
-  setInterval(function(){
-
-    loadM
+                <p>
+                    Here in Miffy 🤍 ૮꒰ • ༝ • ꒱ა 🤍, you don't have to already be a Miffy expert.
+                    Whether you joined for chess, the 
