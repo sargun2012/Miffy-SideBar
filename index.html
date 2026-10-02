@@ -6,387 +6,444 @@
 <title>Miffy Local Hub</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
+html,body{
+  margin:0;
+  padding:0;
+  min-height:100%;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #55545a;
-  background: #f7f7f8;
-  transition: background 1s ease;
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:#57565c;
+  background:#f7f7f8;
+  transition:background 1s ease;
 }
 
-body.morning {
-  background: #fafafa;
+body.morning{background:#fafafa;}
+body.day{background:#f7f8f8;}
+body.sunset{background:#f9f8f7;}
+body.night{background:#f3f3f5;}
+
+.page{
+  width:94%;
+  max-width:920px;
+  margin:20px auto 50px;
 }
 
-body.day {
-  background: #f6f7f7;
+.card{
+  background:#ffffff;
+  border:2px solid #dedee1;
+  border-radius:30px;
+  padding:30px 24px;
+  margin-bottom:28px;
+  box-shadow:0 4px 18px rgba(70,70,80,.05);
 }
 
-body.sunset {
-  background: #f8f7f6;
+.main-heading,
+.section-heading{
+  margin:0 0 25px;
+  text-align:center;
+  white-space:nowrap;
+  line-height:1.05;
+  font-weight:800;
+  color:#59585e;
 }
 
-body.night {
-  background: #f3f3f5;
+.main-heading{
+  font-size:clamp(30px,6vw,58px);
 }
 
-.page {
-  width: min(920px, 94%);
-  margin: 24px auto 50px;
+.section-heading{
+  font-size:clamp(27px,5vw,48px);
 }
 
-.card {
-  background: rgba(255,255,255,0.96);
-  border: 2px solid #dedee1;
-  border-radius: 30px;
-  padding: 30px 24px;
-  margin-bottom: 28px;
-  box-shadow: 0 4px 18px rgba(80,80,90,0.05);
+
+/* =========================
+   MEMBER COUNT
+   ========================= */
+
+.member-count{
+  text-align:center;
+  font-size:clamp(48px,10vw,88px);
+  line-height:1;
+  font-weight:900;
+  color:#8d8c92;
+  margin:15px 0;
 }
 
-.main-heading {
-  margin: 0 0 25px;
-  text-align: center;
-  font-size: clamp(30px, 6vw, 58px);
-  line-height: 1.05;
-  white-space: nowrap;
-  color: #55545a;
-  font-weight: 800;
+.sub-title{
+  text-align:center;
+  font-size:clamp(17px,3vw,26px);
+  font-weight:800;
+  letter-spacing:2px;
+  color:#aaa9ae;
 }
 
-.section-heading {
-  margin: 0 0 25px;
-  text-align: center;
-  font-size: clamp(27px, 5vw, 48px);
-  line-height: 1.05;
-  white-space: nowrap;
-  color: #66656b;
-  font-weight: 800;
+.status{
+  min-height:20px;
+  margin-top:10px;
+  text-align:center;
+  color:#aaa9ae;
+  font-size:14px;
 }
 
-.member-count {
-  text-align: center;
-  font-size: clamp(48px, 10vw, 88px);
-  line-height: 1;
-  font-weight: 900;
-  color: #8d8c92;
-  margin: 12px 0;
+
+/* =========================
+   NEWEST MEMBERS
+   ========================= */
+
+.members-list{
+  display:grid;
+  gap:18px;
 }
 
-.sub-title {
-  text-align: center;
-  font-size: clamp(18px, 3vw, 27px);
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: #aaa9ae;
+.member{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  min-height:92px;
+  padding:19px 22px;
+  background:#f8f8f9;
+  border:2px solid #dedee1;
+  border-radius:24px;
 }
 
-.status {
-  text-align: center;
-  font-size: 15px;
-  margin-top: 12px;
-  color: #aaa9ae;
-  min-height: 20px;
+.member-number{
+  flex:0 0 54px;
+  width:54px;
+  height:54px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#e9e9ec;
+  color:#77767d;
+  font-size:25px;
+  font-weight:800;
 }
 
-.members-list {
-  display: grid;
-  gap: 18px;
+.member-name{
+  min-width:0;
+  overflow-wrap:anywhere;
+  color:#5e5d64;
+  font-size:clamp(19px,4vw,29px);
+  font-weight:800;
 }
 
-.member {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  background: #f8f8f9;
-  border: 2px solid #dedee1;
-  border-radius: 24px;
-  padding: 20px 22px;
-  min-height: 92px;
+.member-date{
+  margin-left:auto;
+  color:#aaa9ae;
+  font-size:14px;
+  white-space:nowrap;
 }
 
-.member-number {
-  flex: 0 0 54px;
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #e9e9ec;
-  color: #77767d;
-  font-size: 25px;
-  font-weight: 800;
+.api-status{
+  color:#aaa9ae;
 }
 
-.member-name {
-  min-width: 0;
-  overflow-wrap: anywhere;
-  font-size: clamp(19px, 4vw, 29px);
-  font-weight: 800;
-  color: #5e5d64;
+
+/* =========================
+   CALENDAR
+   ========================= */
+
+.local-card{
+  padding-bottom:28px;
 }
 
-.member-date {
-  margin-left: auto;
-  white-space: nowrap;
-  color: #aaa9ae;
-  font-size: 14px;
+.calendar-wrap{
+  border:2px solid #dedee1;
+  border-radius:28px;
+  padding:18px;
+  background:#fbfbfc;
 }
 
-.local-card {
-  padding-bottom: 26px;
+.calendar-header{
+  display:grid;
+  grid-template-columns:52px 1fr 52px;
+  align-items:center;
+  gap:12px;
 }
 
-.calendar-wrap {
-  border: 2px solid #dedee1;
-  border-radius: 28px;
-  padding: 18px;
-  background: #fbfbfc;
+.month-button{
+  width:52px;
+  height:52px;
+  border:2px solid #dedee1;
+  border-radius:50%;
+  background:#ffffff;
+  color:#77767d;
+  font-size:30px;
+  line-height:1;
+  cursor:pointer;
 }
 
-.calendar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+.month-button:active{
+  transform:scale(.95);
 }
 
-.month-button {
-  width: 52px;
-  height: 52px;
-  border: 2px solid #dedee1;
-  border-radius: 50%;
-  background: white;
-  color: #77767d;
-  font-size: 30px;
-  cursor: pointer;
-}
-
-.month-button:active {
-  transform: scale(.95);
-}
-
-.calendar-month {
-  flex: 1;
-  text-align: center;
-  font-size: clamp(21px, 4vw, 32px);
-  font-weight: 800;
-  color: #66656b;
-  white-space: nowrap;
+.calendar-month{
+  text-align:center;
+  color:#66656b;
+  font-size:clamp(20px,4vw,32px);
+  font-weight:800;
+  white-space:nowrap;
 }
 
 .weekdays,
-.calendar-days {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+.calendar-days{
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
 }
 
-.weekdays {
-  margin-top: 24px;
+.weekdays{
+  margin-top:24px;
 }
 
-.weekdays div {
-  text-align: center;
-  color: #aaa9ae;
-  font-size: clamp(12px, 2.5vw, 17px);
-  font-weight: 800;
-  padding: 7px 0;
+.weekdays div{
+  padding:7px 0;
+  text-align:center;
+  color:#aaa9ae;
+  font-size:clamp(12px,2.5vw,17px);
+  font-weight:800;
 }
 
-.calendar-days {
-  row-gap: 8px;
-  margin-top: 8px;
+.calendar-days{
+  margin-top:8px;
+  row-gap:8px;
 }
 
-.calendar-day {
-  min-width: 0;
-  height: 46px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #65646a;
-  font-size: clamp(14px, 3vw, 18px);
-  font-weight: 700;
+.calendar-day{
+  height:46px;
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#65646a;
+  font-size:clamp(14px,3vw,18px);
+  font-weight:700;
 }
 
-.calendar-day.empty {
-  visibility: hidden;
+.calendar-day.empty{
+  visibility:hidden;
 }
 
-.calendar-day.today span {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: #e3e3e6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #55545a;
-  font-weight: 900;
+.calendar-day.today span{
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#e2e2e5;
+  color:#55545a;
+  font-weight:900;
 }
 
-.local-time {
-  text-align: center;
-  margin-top: 28px;
-  font-size: clamp(38px, 9vw, 70px);
-  font-weight: 900;
-  color: #5c5b62;
-  line-height: 1;
+
+/* =========================
+   LOCAL TIME
+   ========================= */
+
+.local-time{
+  margin-top:28px;
+  text-align:center;
+  color:#5c5b62;
+  font-size:clamp(38px,9vw,70px);
+  font-weight:900;
+  line-height:1;
 }
 
-.local-date {
-  text-align: center;
-  margin-top: 12px;
-  font-size: clamp(17px, 3vw, 25px);
-  font-weight: 700;
-  color: #88878d;
+.local-date{
+  margin-top:12px;
+  text-align:center;
+  color:#88878d;
+  font-size:clamp(17px,3vw,25px);
+  font-weight:700;
 }
 
-.location-info {
-  margin-top: 22px;
-  display: grid;
-  gap: 10px;
+.location-info{
+  display:grid;
+  gap:10px;
+  margin-top:22px;
 }
 
-.location-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  flex-wrap: wrap;
-  color: #77767d;
-  font-size: clamp(14px, 2.8vw, 18px);
-  font-weight: 700;
-  text-align: center;
+.location-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:9px;
+  text-align:center;
+  color:#77767d;
+  font-size:clamp(14px,2.8vw,18px);
+  font-weight:700;
 }
 
-.location-icon {
-  color: #9a999f;
+.location-icon{
+  color:#99989e;
 }
 
-.loading {
-  color: #aaa9ae;
-}
 
-.error {
-  color: #a5a4a9;
-}
+/* =========================
+   MOBILE
+   ========================= */
 
-@media (max-width: 520px) {
-  .page {
-    width: 94%;
-    margin-top: 12px;
+@media(max-width:520px){
+
+  .page{
+    width:94%;
+    margin-top:12px;
   }
 
-  .card {
-    padding: 25px 15px;
-    border-radius: 27px;
+  .card{
+    padding:25px 15px;
+    border-radius:27px;
   }
 
-  .member {
-    padding: 17px 15px;
-    gap: 13px;
+  .member{
+    min-height:88px;
+    padding:17px 15px;
+    gap:13px;
   }
 
-  .member-number {
-    flex-basis: 48px;
-    width: 48px;
-    height: 48px;
-    font-size: 21px;
+  .member-number{
+    flex-basis:48px;
+    width:48px;
+    height:48px;
+    font-size:21px;
   }
 
-  .member-date {
-    display: none;
+  .member-date{
+    display:none;
   }
 
-  .calendar-wrap {
-    padding: 12px 8px;
+  .calendar-wrap{
+    padding:12px 8px;
   }
 
-  .month-button {
-    width: 46px;
-    height: 46px;
-    font-size: 27px;
+  .calendar-header{
+    grid-template-columns:46px 1fr 46px;
+    gap:8px;
   }
 
-  .calendar-day {
-    height: 42px;
+  .month-button{
+    width:46px;
+    height:46px;
+    font-size:27px;
   }
 
-  .calendar-day.today span {
-    width: 38px;
-    height: 38px;
+  .calendar-day{
+    height:42px;
+  }
+
+  .calendar-day.today span{
+    width:38px;
+    height:38px;
   }
 }
 </style>
 </head>
 
 <body>
+
 <div class="page">
 
-  <!-- MEMBER COUNT -->
+  <!-- =========================
+       MEMBER COUNT
+       ========================= -->
+
   <section class="card">
-    <h1 class="main-heading">✨ Miffy Members ✨</h1>
 
-    <div id="memberCount" class="member-count loading">Loading...</div>
+    <h1 class="main-heading">
+      ✨ Miffy Members ✨
+    </h1>
 
-    <div class="sub-title">LIVE CLUB DATA</div>
-    <div id="memberStatus" class="status">Connecting to Chess.com...</div>
+    <div id="memberCount" class="member-count">
+      Loading...
+    </div>
+
+    <div class="sub-title">
+      LIVE CLUB DATA
+    </div>
+
+    <div id="memberStatus" class="status">
+      Connecting to Chess.com...
+    </div>
+
   </section>
 
 
-  <!-- NEWEST MEMBERS -->
+  <!-- =========================
+       NEWEST MEMBERS
+       ========================= -->
+
   <section class="card">
-    <h2 class="section-heading">🌱 Newest Members 🌱</h2>
+
+    <h2 class="section-heading">
+      🌱 Newest Members 🌱
+    </h2>
 
     <div id="membersList" class="members-list">
+
       <div class="member">
         <div class="member-number">1</div>
-        <div class="member-name loading">Loading...</div>
+        <div class="member-name">Loading...</div>
       </div>
 
       <div class="member">
         <div class="member-number">2</div>
-        <div class="member-name loading">Loading...</div>
+        <div class="member-name">Loading...</div>
       </div>
 
       <div class="member">
         <div class="member-number">3</div>
-        <div class="member-name loading">Loading...</div>
+        <div class="member-name">Loading...</div>
       </div>
+
     </div>
+
   </section>
 
 
-  <!-- LOCAL TIME -->
+  <!-- =========================
+       LOCAL TIME
+       COMPLETELY INDEPENDENT
+       ========================= -->
+
   <section class="card local-card">
-    <h2 class="section-heading">🌙 LOCAL TIME 🌙</h2>
+
+    <h2 class="section-heading">
+      🌙 LOCAL TIME 🌙
+    </h2>
 
     <div class="calendar-wrap">
 
       <div class="calendar-header">
-        <button class="month-button" id="prevMonth" type="button" aria-label="Previous month">
+
+        <button
+          class="month-button"
+          id="prevMonth"
+          type="button">
           ‹
         </button>
 
-        <div class="calendar-month" id="calendarMonth">
-          Loading...
+        <div
+          class="calendar-month"
+          id="calendarMonth">
         </div>
 
-        <button class="month-button" id="nextMonth" type="button" aria-label="Next month">
+        <button
+          class="month-button"
+          id="nextMonth"
+          type="button">
           ›
         </button>
+
       </div>
+
 
       <div class="weekdays">
         <div>Sun</div>
@@ -398,551 +455,799 @@ body.night {
         <div>Sat</div>
       </div>
 
-      <div class="calendar-days" id="calendarDays"></div>
+
+      <div
+        class="calendar-days"
+        id="calendarDays">
+      </div>
 
     </div>
 
-    <div id="localTime" class="local-time">Loading...</div>
-    <div id="localDate" class="local-date">Loading...</div>
+
+    <div
+      id="localTime"
+      class="local-time">
+    </div>
+
+    <div
+      id="localDate"
+      class="local-date">
+    </div>
+
 
     <div class="location-info">
+
       <div class="location-row">
         <span class="location-icon">🌍</span>
-        <span id="country">Loading...</span>
+        <span id="country"></span>
       </div>
 
       <div class="location-row">
         <span class="location-icon">📍</span>
-        <span id="area">Loading...</span>
+        <span id="area"></span>
       </div>
 
       <div class="location-row">
         <span class="location-icon">🕐</span>
-        <span id="timezone">Loading...</span>
+        <span id="timezone"></span>
       </div>
+
     </div>
+
   </section>
 
 </div>
 
 
+<!-- =====================================================
+     SCRIPT 1
+     LOCAL FEATURES ONLY
+
+     This script has NO Chess.com API.
+     It runs independently.
+     ===================================================== -->
+
 <script>
-"use strict";
 
-/*
-  Miffy Club
-  Chess.com URL-ID:
-*/
-const MIFFY_CLUB = "miffy-1";
+(function(){
 
-/*
-  IMPORTANT:
-  Chess.com PubAPI officially supports JSONP.
-  We use one request at a time because Chess.com
-  documents that parallel requests may trigger 429.
-*/
-function jsonp(url, timeout = 12000) {
-  return new Promise((resolve, reject) => {
-    const callbackName =
-      "__miffyCallback_" +
+  var monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
+  var calendarDate = new Date();
+
+
+  /* =========================
+     CALENDAR
+     ========================= */
+
+  function renderCalendar(){
+
+    var year = calendarDate.getFullYear();
+    var month = calendarDate.getMonth();
+
+    var monthElement =
+      document.getElementById("calendarMonth");
+
+    var daysElement =
+      document.getElementById("calendarDays");
+
+    if(!monthElement || !daysElement){
+      return;
+    }
+
+    monthElement.textContent =
+      monthNames[month] + " " + year;
+
+    daysElement.innerHTML = "";
+
+
+    var firstDay =
+      new Date(year,month,1).getDay();
+
+    var daysInMonth =
+      new Date(year,month + 1,0).getDate();
+
+
+    var today = new Date();
+
+
+    /* Empty cells */
+    for(var i = 0; i < firstDay; i++){
+
+      var empty =
+        document.createElement("div");
+
+      empty.className =
+        "calendar-day empty";
+
+      empty.innerHTML =
+        "<span>0</span>";
+
+      daysElement.appendChild(empty);
+    }
+
+
+    /* Dates */
+    for(var day = 1; day <= daysInMonth; day++){
+
+      var cell =
+        document.createElement("div");
+
+      cell.className =
+        "calendar-day";
+
+
+      var isToday =
+        day === today.getDate() &&
+        month === today.getMonth() &&
+        year === today.getFullYear();
+
+
+      if(isToday){
+        cell.className += " today";
+      }
+
+
+      var span =
+        document.createElement("span");
+
+      span.textContent = day;
+
+      cell.appendChild(span);
+
+      daysElement.appendChild(cell);
+    }
+  }
+
+
+  /* =========================
+     CALENDAR BUTTONS
+     ========================= */
+
+  document
+    .getElementById("prevMonth")
+    .onclick = function(){
+
+      calendarDate.setMonth(
+        calendarDate.getMonth() - 1
+      );
+
+      renderCalendar();
+    };
+
+
+  document
+    .getElementById("nextMonth")
+    .onclick = function(){
+
+      calendarDate.setMonth(
+        calendarDate.getMonth() + 1
+      );
+
+      renderCalendar();
+    };
+
+
+  /* =========================
+     TIMEZONE COUNTRY
+     ========================= */
+
+  var countryMap = {
+
+    "Asia/Kolkata":"India",
+    "Asia/Calcutta":"India",
+
+    "Asia/Dhaka":"Bangladesh",
+    "Asia/Kathmandu":"Nepal",
+    "Asia/Karachi":"Pakistan",
+    "Asia/Colombo":"Sri Lanka",
+
+    "Asia/Tokyo":"Japan",
+    "Asia/Seoul":"South Korea",
+    "Asia/Shanghai":"China",
+    "Asia/Hong_Kong":"Hong Kong",
+    "Asia/Singapore":"Singapore",
+    "Asia/Bangkok":"Thailand",
+    "Asia/Jakarta":"Indonesia",
+    "Asia/Manila":"Philippines",
+
+    "Europe/London":"United Kingdom",
+    "Europe/Paris":"France",
+    "Europe/Berlin":"Germany",
+    "Europe/Rome":"Italy",
+    "Europe/Madrid":"Spain",
+
+    "America/New_York":"United States",
+    "America/Chicago":"United States",
+    "America/Denver":"United States",
+    "America/Los_Angeles":"United States",
+
+    "America/Toronto":"Canada",
+    "America/Vancouver":"Canada",
+
+    "Australia/Sydney":"Australia",
+    "Australia/Melbourne":"Australia",
+
+    "Pacific/Auckland":"New Zealand"
+  };
+
+
+  function getCountry(timezone){
+
+    if(countryMap[timezone]){
+      return countryMap[timezone];
+    }
+
+    return "Local region";
+  }
+
+
+  function getArea(timezone){
+
+    var parts =
+      timezone.split("/");
+
+    if(parts.length > 1){
+
+      return parts
+        .slice(1)
+        .join(" / ")
+        .replace(/_/g," ");
+    }
+
+    return "Local area";
+  }
+
+
+  /* =========================
+     TIME THEME
+     ========================= */
+
+  function getTheme(hour){
+
+    if(hour >= 5 && hour < 8){
+      return "morning";
+    }
+
+    if(hour >= 8 && hour < 17){
+      return "day";
+    }
+
+    if(hour >= 17 && hour < 20){
+      return "sunset";
+    }
+
+    return "night";
+  }
+
+
+  /* =========================
+     LOCAL CLOCK
+     ========================= */
+
+  function updateLocalInfo(){
+
+    var now = new Date();
+
+
+    var timezone =
+      Intl.DateTimeFormat()
+        .resolvedOptions()
+        .timeZone || "Local timezone";
+
+
+    var hour =
+      now.getHours();
+
+
+    document.body.className =
+      getTheme(hour);
+
+
+    document.getElementById("localTime").textContent =
+      now.toLocaleTimeString([],{
+        hour:"numeric",
+        minute:"2-digit",
+        second:"2-digit"
+      });
+
+
+    document.getElementById("localDate").textContent =
+      now.toLocaleDateString([],{
+        weekday:"long",
+        year:"numeric",
+        month:"long",
+        day:"numeric"
+      });
+
+
+    document.getElementById("country").textContent =
+      getCountry(timezone);
+
+
+    document.getElementById("area").textContent =
+      getArea(timezone);
+
+
+    document.getElementById("timezone").textContent =
+      timezone;
+  }
+
+
+  /* =========================
+     START LOCAL FEATURES NOW
+     ========================= */
+
+  renderCalendar();
+
+  updateLocalInfo();
+
+  setInterval(
+    updateLocalInfo,
+    1000
+  );
+
+})();
+
+</script>
+
+
+<!-- =====================================================
+     SCRIPT 2
+     CHESS.COM API ONLY
+
+     If this script/API fails, the calendar,
+     clock and timezone above are already running.
+     ===================================================== -->
+
+<script>
+
+(function(){
+
+  var CLUB = "miffy-1";
+
+
+  /* =========================
+     JSONP REQUEST
+     ========================= */
+
+  function chessJSONP(url,done,failed){
+
+    var name =
+      "miffyCallback_" +
       Date.now() +
       "_" +
-      Math.random().toString(36).slice(2);
+      Math.floor(
+        Math.random() * 100000
+      );
 
-    const script = document.createElement("script");
-    let finished = false;
 
-    function cleanup() {
-      if (script.parentNode) {
+    var script =
+      document.createElement("script");
+
+
+    var finished = false;
+
+
+    function cleanup(){
+
+      if(script.parentNode){
         script.parentNode.removeChild(script);
       }
 
-      try {
-        delete window[callbackName];
-      } catch (_) {
-        window[callbackName] = undefined;
+      try{
+        delete window[name];
+      }catch(e){
+        window[name] = null;
       }
     }
 
-    const timer = setTimeout(() => {
-      if (finished) return;
 
-      finished = true;
-      cleanup();
+    var timer =
+      setTimeout(function(){
 
-      reject(new Error("Chess.com API timed out"));
-    }, timeout);
+        if(finished){
+          return;
+        }
 
-    window[callbackName] = function(data) {
-      if (finished) return;
+        finished = true;
 
-      finished = true;
-      clearTimeout(timer);
-      cleanup();
+        cleanup();
 
-      resolve(data);
-    };
+        if(failed){
+          failed(
+            new Error("API timeout")
+          );
+        }
 
-    script.onerror = function() {
-      if (finished) return;
+      },15000);
 
-      finished = true;
-      clearTimeout(timer);
-      cleanup();
 
-      reject(new Error("Chess.com API request failed"));
-    };
+    window[name] =
+      function(data){
 
-    /*
-      Cache-buster prevents the browser from keeping
-      an old JSONP script response.
-    */
-    const separator = url.includes("?") ? "&" : "?";
+        if(finished){
+          return;
+        }
+
+        finished = true;
+
+        clearTimeout(timer);
+
+        cleanup();
+
+        if(done){
+          done(data);
+        }
+      };
+
+
+    script.onerror =
+      function(){
+
+        if(finished){
+          return;
+        }
+
+        finished = true;
+
+        clearTimeout(timer);
+
+        cleanup();
+
+        if(failed){
+          failed(
+            new Error(
+              "Chess.com API request failed"
+            )
+          );
+        }
+      };
+
 
     script.src =
       url +
-      separator +
-      "callback=" +
-      encodeURIComponent(callbackName) +
-      "&_=" +
-      Date.now();
+      "?callback=" +
+      encodeURIComponent(name);
+
 
     document.head.appendChild(script);
-  });
-}
-
-
-/* ---------------- MEMBER COUNT ---------------- */
-
-async function updateMemberCount() {
-  const countElement = document.getElementById("memberCount");
-  const statusElement = document.getElementById("memberStatus");
-
-  try {
-    const data = await jsonp(
-      "https://api.chess.com/pub/club/" + MIFFY_CLUB
-    );
-
-    if (
-      data &&
-      typeof data.members_count === "number"
-    ) {
-      countElement.textContent =
-        data.members_count.toLocaleString();
-
-      countElement.classList.remove("loading");
-
-      statusElement.textContent =
-        "Updated from Chess.com PubAPI";
-    } else {
-      throw new Error("Member count unavailable");
-    }
-
-  } catch (error) {
-    console.error(error);
-
-    countElement.textContent = "—";
-    countElement.classList.remove("loading");
-
-    statusElement.textContent =
-      "Chess.com data is temporarily unavailable";
-  }
-}
-
-
-/* ---------------- NEWEST MEMBERS ---------------- */
-
-function escapeHTML(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-
-function formatJoined(timestamp) {
-  if (!timestamp) return "";
-
-  const date = new Date(timestamp * 1000);
-
-  if (Number.isNaN(date.getTime())) {
-    return "";
   }
 
-  return date.toLocaleDateString(undefined, {
-    year: "numeric",
-    month: "short",
-    day: "numeric"
-  });
-}
+
+  /* =========================
+     MEMBER COUNT
+     ========================= */
+
+  function loadMemberCount(){
+
+    var count =
+      document.getElementById("memberCount");
+
+    var status =
+      document.getElementById("memberStatus");
 
 
-async function updateNewestMembers() {
-  const list = document.getElementById("membersList");
+    chessJSONP(
 
-  try {
-    const data = await jsonp(
-      "https://api.chess.com/pub/club/" +
-      MIFFY_CLUB +
-      "/members"
-    );
+      "https://api.chess.com/pub/club/" + CLUB,
 
-    const allMembers = [];
+      function(data){
 
-    /*
-      PubAPI provides weekly/monthly/all_time
-      member lists. Combine them so that we have
-      the best chance of finding the newest joins.
-    */
-    const groups = [
-      data && data.weekly,
-      data && data.monthly,
-      data && data.all_time
-    ];
+        if(
+          data &&
+          typeof data.members_count === "number"
+        ){
 
-    groups.forEach(group => {
-      if (!Array.isArray(group)) return;
+          count.textContent =
+            data.members_count.toLocaleString();
 
-      group.forEach(member => {
-        if (
-          member &&
-          member.username &&
-          typeof member.joined === "number"
-        ) {
-          allMembers.push(member);
+          status.textContent =
+            "Updated from Chess.com";
+
+        }else{
+
+          count.textContent =
+            "Unavailable";
+
+          status.textContent =
+            "Member count unavailable";
         }
-      });
-    });
+      },
 
-    /*
-      Remove duplicate usernames.
-    */
-    const unique = new Map();
+      function(){
 
-    allMembers.forEach(member => {
-      const key = member.username.toLowerCase();
+        count.textContent =
+          "Unavailable";
 
-      const previous = unique.get(key);
-
-      if (
-        !previous ||
-        member.joined > previous.joined
-      ) {
-        unique.set(key, member);
+        status.textContent =
+          "Chess.com data unavailable";
       }
-    });
+    );
+  }
 
-    const newest = Array.from(unique.values())
-      .sort((a, b) => b.joined - a.joined)
-      .slice(0, 3);
 
-    if (!newest.length) {
-      throw new Error("No member data returned");
+  /* =========================
+     NEWEST MEMBERS
+     ========================= */
+
+  function joinedDate(timestamp){
+
+    if(!timestamp){
+      return "";
     }
+
+    var date =
+      new Date(timestamp * 1000);
+
+    if(isNaN(date.getTime())){
+      return "";
+    }
+
+    return date.toLocaleDateString([],{
+      year:"numeric",
+      month:"short",
+      day:"numeric"
+    });
+  }
+
+
+  function showMemberError(){
+
+    var list =
+      document.getElementById("membersList");
 
     list.innerHTML = "";
 
-    newest.forEach((member, index) => {
-      const row = document.createElement("div");
-      row.className = "member";
 
-      const number = document.createElement("div");
-      number.className = "member-number";
-      number.textContent = index + 1;
+    for(var i = 1; i <= 3; i++){
 
-      const name = document.createElement("div");
-      name.className = "member-name";
-      name.textContent = member.username;
+      var row =
+        document.createElement("div");
 
-      const date = document.createElement("div");
-      date.className = "member-date";
-      date.textContent = formatJoined(member.joined);
+      row.className =
+        "member";
+
+
+      var number =
+        document.createElement("div");
+
+      number.className =
+        "member-number";
+
+      number.textContent = i;
+
+
+      var name =
+        document.createElement("div");
+
+      name.className =
+        "member-name api-status";
+
+      name.textContent =
+        "Unavailable";
+
 
       row.appendChild(number);
       row.appendChild(name);
-      row.appendChild(date);
-
-      list.appendChild(row);
-    });
-
-  } catch (error) {
-    console.error(error);
-
-    list.innerHTML = "";
-
-    for (let i = 1; i <= 3; i++) {
-      const row = document.createElement("div");
-      row.className = "member";
-
-      row.innerHTML =
-        '<div class="member-number">' +
-        i +
-        '</div>' +
-        '<div class="member-name error">' +
-        'Unavailable' +
-        '</div>';
 
       list.appendChild(row);
     }
   }
-}
 
 
-/* ---------------- CALENDAR ---------------- */
+  function loadNewestMembers(){
 
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
-];
-
-let calendarDate = new Date();
+    var list =
+      document.getElementById("membersList");
 
 
-function renderCalendar() {
-  const year = calendarDate.getFullYear();
-  const month = calendarDate.getMonth();
+    chessJSONP(
 
-  document.getElementById("calendarMonth").textContent =
-    monthNames[month] + " " + year;
+      "https://api.chess.com/pub/club/" +
+      CLUB +
+      "/members",
 
-  const container =
-    document.getElementById("calendarDays");
+      function(data){
 
-  container.innerHTML = "";
+        var all = [];
 
-  const firstDay =
-    new Date(year, month, 1).getDay();
-
-  const daysInMonth =
-    new Date(year, month + 1, 0).getDate();
-
-  const today = new Date();
-
-  for (let i = 0; i < firstDay; i++) {
-    const empty = document.createElement("div");
-    empty.className = "calendar-day empty";
-    empty.innerHTML = "<span>0</span>";
-    container.appendChild(empty);
-  }
-
-  for (let day = 1; day <= daysInMonth; day++) {
-    const cell = document.createElement("div");
-    cell.className = "calendar-day";
-
-    const isToday =
-      day === today.getDate() &&
-      month === today.getMonth() &&
-      year === today.getFullYear();
-
-    if (isToday) {
-      cell.classList.add("today");
-    }
-
-    const span = document.createElement("span");
-    span.textContent = day;
-
-    cell.appendChild(span);
-    container.appendChild(cell);
-  }
-}
+        var groups = [
+          data && data.weekly,
+          data && data.monthly,
+          data && data.all_time
+        ];
 
 
-document.getElementById("prevMonth")
-  .addEventListener("click", () => {
-    calendarDate.setMonth(
-      calendarDate.getMonth() - 1
+        for(
+          var g = 0;
+          g < groups.length;
+          g++
+        ){
+
+          var group =
+            groups[g];
+
+          if(!Array.isArray(group)){
+            continue;
+          }
+
+
+          for(
+            var i = 0;
+            i < group.length;
+            i++
+          ){
+
+            var member =
+              group[i];
+
+
+            if(
+              member &&
+              member.username &&
+              typeof member.joined === "number"
+            ){
+
+              all.push(member);
+            }
+          }
+        }
+
+
+        /* Remove duplicates */
+        var unique = {};
+
+
+        for(
+          var j = 0;
+          j < all.length;
+          j++
+        ){
+
+          var m =
+            all[j];
+
+          var key =
+            String(m.username).toLowerCase();
+
+
+          if(
+            !unique[key] ||
+            m.joined > unique[key].joined
+          ){
+
+            unique[key] = m;
+          }
+        }
+
+
+        var newest =
+          Object.keys(unique)
+            .map(function(key){
+              return unique[key];
+            })
+            .sort(function(a,b){
+              return b.joined - a.joined;
+            })
+            .slice(0,3);
+
+
+        if(newest.length === 0){
+
+          showMemberError();
+
+          return;
+        }
+
+
+        list.innerHTML = "";
+
+
+        for(
+          var n = 0;
+          n < newest.length;
+          n++
+        ){
+
+          var person =
+            newest[n];
+
+
+          var row =
+            document.createElement("div");
+
+          row.className =
+            "member";
+
+
+          var number =
+            document.createElement("div");
+
+          number.className =
+            "member-number";
+
+          number.textContent =
+            n + 1;
+
+
+          var name =
+            document.createElement("div");
+
+          name.className =
+            "member-name";
+
+          name.textContent =
+            person.username;
+
+
+          var date =
+            document.createElement("div");
+
+          date.className =
+            "member-date";
+
+          date.textContent =
+            joinedDate(person.joined);
+
+
+          row.appendChild(number);
+          row.appendChild(name);
+          row.appendChild(date);
+
+          list.appendChild(row);
+        }
+
+      },
+
+      function(){
+
+        showMemberError();
+
+      }
     );
-
-    renderCalendar();
-  });
-
-
-document.getElementById("nextMonth")
-  .addEventListener("click", () => {
-    calendarDate.setMonth(
-      calendarDate.getMonth() + 1
-    );
-
-    renderCalendar();
-  });
-
-
-/* ---------------- LOCAL TIME ---------------- */
-
-const timezoneCountryMap = {
-  "Asia/Kolkata": "India",
-  "Asia/Calcutta": "India",
-
-  "Asia/Dhaka": "Bangladesh",
-  "Asia/Kathmandu": "Nepal",
-  "Asia/Karachi": "Pakistan",
-  "Asia/Colombo": "Sri Lanka",
-
-  "Asia/Tokyo": "Japan",
-  "Asia/Seoul": "South Korea",
-  "Asia/Shanghai": "China",
-  "Asia/Hong_Kong": "Hong Kong",
-  "Asia/Singapore": "Singapore",
-  "Asia/Bangkok": "Thailand",
-  "Asia/Jakarta": "Indonesia",
-  "Asia/Manila": "Philippines",
-
-  "Europe/London": "United Kingdom",
-  "Europe/Paris": "France",
-  "Europe/Berlin": "Germany",
-  "Europe/Rome": "Italy",
-  "Europe/Madrid": "Spain",
-
-  "America/New_York": "United States",
-  "America/Chicago": "United States",
-  "America/Denver": "United States",
-  "America/Los_Angeles": "United States",
-
-  "America/Toronto": "Canada",
-  "America/Vancouver": "Canada",
-
-  "Australia/Sydney": "Australia",
-  "Australia/Melbourne": "Australia",
-  "Pacific/Auckland": "New Zealand"
-};
-
-
-function getCountryFromTimezone(timezone) {
-  if (timezoneCountryMap[timezone]) {
-    return timezoneCountryMap[timezone];
   }
 
-  const parts = timezone.split("/");
 
-  if (parts.length > 1) {
-    return parts[0];
-  }
+  /* =========================
+     START API AFTER LOCAL PAGE
+     ========================= */
 
-  return "Unknown";
-}
+  setTimeout(function(){
 
+    loadMemberCount();
 
-function getAreaFromTimezone(timezone) {
-  const parts = timezone.split("/");
+    /*
+      Second API request starts slightly later.
+      This keeps requests from being parallel.
+    */
 
-  if (parts.length >= 2) {
-    return parts
-      .slice(1)
-      .join(" / ")
-      .replaceAll("_", " ");
-  }
+    setTimeout(function(){
+      loadNewestMembers();
+    },1000);
 
-  return timezone;
-}
+  },300);
 
 
-function getTimeTheme(hour) {
-  if (hour >= 5 && hour < 8) {
-    return "morning";
-  }
+  /*
+    Refresh API sections every 5 minutes.
 
-  if (hour >= 8 && hour < 17) {
-    return "day";
-  }
+    The calendar/time never depends on this.
+  */
 
-  if (hour >= 17 && hour < 20) {
-    return "sunset";
-  }
+  setInterval(function(){
 
-  return "night";
-}
-
-
-function updateLocalInfo() {
-  const now = new Date();
-
-  const timezone =
-    Intl.DateTimeFormat().resolvedOptions().timeZone ||
-    "Local timezone";
-
-  const hour = Number(
-    new Intl.DateTimeFormat(undefined, {
-      hour: "numeric",
-      hour12: false
-    }).format(now)
-  );
-
-  document.body.classList.remove(
-    "morning",
-    "day",
-    "sunset",
-    "night"
-  );
-
-  document.body.classList.add(
-    getTimeTheme(hour)
-  );
-
-  document.getElementById("localTime").textContent =
-    now.toLocaleTimeString(undefined, {
-      hour: "numeric",
-      minute: "2-digit",
-      second: "2-digit"
-    });
-
-  document.getElementById("localDate").textContent =
-    now.toLocaleDateString(undefined, {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric"
-    });
-
-  document.getElementById("country").textContent =
-    getCountryFromTimezone(timezone);
-
-  document.getElementById("area").textContent =
-    getAreaFromTimezone(timezone);
-
-  document.getElementById("timezone").textContent =
-    timezone;
-}
-
-
-/* ---------------- START ---------------- */
-
-renderCalendar();
-updateLocalInfo();
-
-setInterval(updateLocalInfo, 1000);
-
-/*
-  Run requests one after another.
-  This avoids sending parallel PubAPI requests.
-*/
-(async function loadChessData() {
-  await updateMemberCount();
-  await updateNewestMembers();
-})();
-
-/*
-  PubAPI responses can be cached by Chess.com
-  for up to 12 hours, so repeatedly requesting
-  the API does not necessarily mean the displayed
-  member count changes immediately.
-*/
-setInterval(async () => {
-  await updateMemberCount();
-  await updateNewestMembers();
-}, 5 * 60 * 1000);
-</script>
-
-</body>
-</html>    
+    loadM
