@@ -159,32 +159,67 @@ h1{
     white-space:nowrap;
 }
 
-.newest-members{
-    margin:20px auto 0;
-    max-width:520px;
+.decor{
+    text-align:center;
+    color:#967e78;
+    margin:28px 0;
+    line-height:2;
+    font-size:1.05rem;
+}
+
+/* SECTIONS */
+
+.section{
+    background:rgba(255,255,255,.88);
+    border:1px solid rgba(220,220,218,.95);
+    border-radius:27px;
+    padding:30px;
+    margin:28px 0;
+    box-shadow:0 12px 35px rgba(90,90,90,.08);
+    backdrop-filter:blur(7px);
+}
+
+.section-title{
+    text-align:center;
+    color:#b3a29e;
+    font-size:clamp(1.8rem,6vw,2.5rem);
+    margin-bottom:28px;
+    letter-spacing:.3px;
+    white-space:nowrap;
+    line-height:1.2;
+    font-weight:bold;
+}
+
+/* ABOUT MIFFY TITLE — FIXED */
+
+.about-title{
+    white-space:normal !important;
+    line-height:1.15;
+}
+
+.about-title .about-name{
+    display:block;
+    white-space:nowrap;
+}
+
+.about-title .about-bunny{
+    display:block;
+    margin-top:12px;
+    font-size:1.35rem;
+    color:#a98f88;
+    white-space:nowrap;
+}
+
+/* OWNER */
+
+.owner{
     text-align:center;
 }
 
-.newest-title{
-    color:#9a8984;
-    font-size:1.15rem;
-    font-weight:bold;
-    margin-bottom:12px;
-}
-
-.newest-list{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-}
-
-.newest-member{
-    background:#f7f1f2;
-    border:1px solid #eee1e4;
-    border-radius:16px;
-    padding:11px 15px;
-    color:#766864;
-    font-weight:bold;
+.owner strong{
+    display:block;
+    color:#705c58;
+    font-size:1.45rem;
 }
 
 /* CALENDAR */
@@ -232,14 +267,13 @@ h1{
     transform:scale(1.05);
 }
 
-/* VISITOR INFO */
-
 .calendar-location{
     text-align:center;
     margin:0 0 18px;
-    color:#9a8984;
-    font-size:.88rem;
-    line-height:1.8;
+    color:#88736d;
+    font-size:1.05rem;
+    font-weight:bold;
+    line-height:1.9;
 }
 
 .calendar-location div{
@@ -281,67 +315,6 @@ h1{
     color:#655c67;
     font-weight:bold;
     box-shadow:0 3px 10px rgba(100,90,100,.08);
-}
-
-.decor{
-    text-align:center;
-    color:#967e78;
-    margin:28px 0;
-    line-height:2;
-    font-size:1.05rem;
-}
-
-/* SECTIONS */
-
-.section{
-    background:rgba(255,255,255,.88);
-    border:1px solid rgba(220,220,218,.95);
-    border-radius:27px;
-    padding:30px;
-    margin:28px 0;
-    box-shadow:0 12px 35px rgba(90,90,90,.08);
-    backdrop-filter:blur(7px);
-}
-
-.section-title{
-    text-align:center;
-    color:#b3a29e;
-    font-size:clamp(1.8rem,6vw,2.5rem);
-    margin-bottom:28px;
-    letter-spacing:.3px;
-    white-space:nowrap;
-    line-height:1.2;
-    font-weight:bold;
-}
-
-.about-title{
-    white-space:normal !important;
-    line-height:1.15;
-}
-
-.about-title .about-name{
-    display:block;
-    white-space:nowrap;
-}
-
-.about-title .about-bunny{
-    display:block;
-    margin-top:12px;
-    font-size:1.35rem;
-    color:#a98f88;
-    white-space:nowrap;
-}
-
-/* OWNER */
-
-.owner{
-    text-align:center;
-}
-
-.owner strong{
-    display:block;
-    color:#705c58;
-    font-size:1.45rem;
 }
 
 /* MILESTONES */
@@ -655,6 +628,9 @@ h1{
         font-size:.82rem;
     }
 
+    .calendar-location{
+        font-size:1rem;
+    }
 }
 
 @media(max-width:420px){
@@ -706,6 +682,9 @@ h1{
         font-size:1.1rem;
     }
 
+    .calendar-location{
+        font-size:.95rem;
+    }
 }
 </style>
 </head>
@@ -763,94 +742,6 @@ h1{
             ✨ Loading Members... ✨
         </div>
 
-        <div class="newest-members">
-
-            <div class="newest-title">
-                Newest Members
-            </div>
-
-            <div class="newest-list">
-
-                <div class="newest-member" id="newest1">
-                    Loading...
-                </div>
-
-                <div class="newest-member" id="newest2">
-                    Loading...
-                </div>
-
-                <div class="newest-member" id="newest3">
-                    Loading...
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="calendar-section">
-
-            <div class="calendar-header">
-
-                <button
-                    class="calendar-button"
-                    id="previousMonth"
-                    type="button"
-                    aria-label="Previous month"
-                >
-                    ‹
-                </button>
-
-                <div
-                    class="calendar-month"
-                    id="calendarMonth"
-                ></div>
-
-                <button
-                    class="calendar-button"
-                    id="nextMonth"
-                    type="button"
-                    aria-label="Next month"
-                >
-                    ›
-                </button>
-
-            </div>
-
-            <div class="calendar-location">
-
-                <div id="visitorTime">
-                    Time: Loading...
-                </div>
-
-                <div id="visitorCountry">
-                    Country: Loading...
-                </div>
-
-                <div id="visitorArea">
-                    Area: Loading...
-                </div>
-
-            </div>
-
-            <div class="calendar-weekdays">
-
-                <div class="calendar-weekday">Sun</div>
-                <div class="calendar-weekday">Mon</div>
-                <div class="calendar-weekday">Tue</div>
-                <div class="calendar-weekday">Wed</div>
-                <div class="calendar-weekday">Thu</div>
-                <div class="calendar-weekday">Fri</div>
-                <div class="calendar-weekday">Sat</div>
-
-            </div>
-
-            <div
-                class="calendar-days"
-                id="calendarDays"
-            ></div>
-
-        </div>
-
     </section>
 
     <div class="decor">
@@ -868,6 +759,70 @@ h1{
         <strong>👑 Yoghurt_22 👑</strong>
 
     </section>
+
+    <div class="calendar-section">
+
+        <div class="calendar-header">
+
+            <button
+                class="calendar-button"
+                id="previousMonth"
+                type="button"
+                aria-label="Previous month"
+            >
+                ‹
+            </button>
+
+            <div
+                class="calendar-month"
+                id="calendarMonth"
+            ></div>
+
+            <button
+                class="calendar-button"
+                id="nextMonth"
+                type="button"
+                aria-label="Next month"
+            >
+                ›
+            </button>
+
+        </div>
+
+        <div class="calendar-location">
+
+            <div id="visitorTime">
+                Time: Loading...
+            </div>
+
+            <div id="visitorCountry">
+                Country: Loading...
+            </div>
+
+            <div id="visitorArea">
+                Area: Loading...
+            </div>
+
+        </div>
+
+        <div class="calendar-weekdays">
+
+            <div class="calendar-weekday">Sun</div>
+            <div class="calendar-weekday">Mon</div>
+            <div class="calendar-weekday">Tue</div>
+            <div class="calendar-weekday">Wed</div>
+            <div class="calendar-weekday">Thu</div>
+            <div class="calendar-weekday">Fri</div>
+            <div class="calendar-weekday">Sat</div>
+
+        </div>
+
+        <div
+            class="calendar-days"
+            id="calendarDays"
+        ></div>
+
+    </div>
 
     <section class="section">
 
@@ -929,6 +884,7 @@ h1{
 
     </section>
 
+    <!-- FIXED: About Miffy is now safely split into two lines -->
     <section class="section">
 
         <h2 class="section-title about-title">
@@ -979,175 +935,399 @@ h1{
 
                 <p>
                     Here in Miffy 🤍 ૮꒰ • ༝ • ꒱ა 🤍, you don't have to already be a Miffy expert.
-                    Whether you joined for chess, the Miffy vibes, or simply wanted a cozy place to play,
-                we're happy to have you here. ♡
-            </p>
+                    Whether you joined for chess, the aesthetics, the community, or simply
+                    because you thought the bunny was cute, you're welcome here.
+                </p>
 
-            <p class="aesthetic-text">
+                <p class="aesthetic-text">
+                    So take a little look around, get yourself miffied, and enjoy some cosy chess.
+                </p>
 
-                Take a little break, grab your favorite drink,
-                play some chess, make new friends, and enjoy
-                the soft little moments along the way.
-                ૮꒰ ˶• ༝ •˶꒱ა
+            </div>
 
-            </p>
+            <div class="aesthetic-bottom">
+                𓆝 𓆟 𓆞 ✦ 𓆝 𓆟 𓆞
+                <br>
+                𓆟 𓆝 ⋆｡°✩ 𓆝 𓆟
+            </div>
 
-        </div>
-
-        <div class="aesthetic-bottom">
-            𓂃 ࣪˖ ִֶָ𐀔 𓂃 ࣪˖ ִֶָ𐀔 𓂃 ࣪˖ ִֶָ𐀔
         </div>
 
     </section>
 
+    <div class="decor">
+        🤍 ૮꒰ • ༝ • ꒱ა 🤍
+        <br>
+        𓆝 𓆟 𓆞 𖥔 ݁˖𓆝 𓆟 𓆞𓆝⋆⭒˚.𓆞
+    </div>
 
     <section class="section">
 
         <h2 class="section-title">
-            𐙚 Club Features 𐙚
+            🎀 𐙚 Club Features 𐙚 🎀
         </h2>
 
         <div class="features">
 
             <div class="feature">
                 <strong>Cozy Community</strong>
-                Meet friendly chess players and enjoy a comfortable Miffy-themed space.
+                Meet other chess players and enjoy a friendly Miffy-themed space.          
+           </div>
+
+            <div class="feature">
+                <strong>Chess Tournaments</strong>
+                Play together, compete, and make fun memories with the club.
             </div>
 
             <div class="feature">
-                <strong>Club Tournaments</strong>
-                Play chess tournaments together and make every game more fun.
+                <strong>Miffy Vibes</strong>
+                Enjoy a soft, cute, cozy atmosphere inspired by Miffy.
             </div>
 
             <div class="feature">
-                <strong>Chess Friends</strong>
-                Find new people to play with and grow together as a community.
-            </div>
-
-            <div class="feature">
-                <strong>Miffy Aesthetic</strong>
-                Soft colors, cute decorations, and cozy Miffy vibes everywhere.
+                <strong>Friendly Games</strong>
+                Find opponents, play chess, and keep the community active.
             </div>
 
             <div class="feature">
                 <strong>Growing Together</strong>
-                Watch our little club grow from the first member to the Miffy Kingdom.
+                Invite friends and help our little Miffy community grow.
             </div>
 
         </div>
 
     </section>
-
-
-    <div class="decor">
-        𓆩♡𓆪 𓂃 ࣪˖ ִֶָ𐀔 𓆩♡𓆪
-        <br>
-        ☕ ₊˚⊹ ♟️ ₊˚⊹ 🐇
-    </div>
-
 
     <section class="section">
 
         <h2 class="section-title">
-            𐙚 Miffy Sweets 𐙚
+            🍰 𐙚 Miffy Sweets 𐙚 🍰
         </h2>
 
         <div class="sweets">
 
-            <div class="sweet">
-                Nanashi jelly
-            </div>
-
-            <div class="sweet">
-                Imo dango
-            </div>
-
-            <div class="sweet">
-                Yomogi dango
-            </div>
-
-            <div class="sweet">
-                Zenzai
-            </div>
-
-            <div class="sweet">
-                Matcha zenzai
-            </div>
-
-            <div class="sweet">
-                Yumochi
-            </div>
-
-            <div class="sweet">
-                Daifuku
-            </div>
-
-            <div class="sweet">
-                Mitarashi dango
-            </div>
-
-            <div class="sweet">
-                Anmitsu
-            </div>
-
-            <div class="sweet">
-                Kinako
-            </div>
-
-            <div class="sweet">
-                Zunda mochi
-            </div>
-
-            <div class="sweet">
-                Warabi mochi
-            </div>
-
-            <div class="sweet">
-                Strawberry warabi mochi
-            </div>
-
-            <div class="sweet">
-                Abekawa mochi
-            </div>
+            <div class="sweet">🍓 Strawberry Milk</div>
+            <div class="sweet">🧋 Milk Tea</div>
+            <div class="sweet">🍪 Miffy Cookies</div>
+            <div class="sweet">🍰 Strawberry Cake</div>
+            <div class="sweet">🥐 Little Croissants</div>
+            <div class="sweet">🍮 Custard Pudding</div>
+            <div class="sweet">🧁 Mini Cupcakes</div>
+            <div class="sweet">🍩 Sugar Donuts</div>
+            <div class="sweet">🍫 Chocolate Bites</div>
+            <div class="sweet">🍯 Honey Toast</div>
+            <div class="sweet">🥞 Fluffy Pancakes</div>
+            <div class="sweet">🍦 Vanilla Ice Cream</div>
+            <div class="sweet">🥨 Cozy Pretzels</div>
+            <div class="sweet">🍵 Matcha Latte</div>
 
         </div>
 
     </section>
 
-
     <div class="decor">
-        𓆝 𓆟 𓆞 ⋆｡°✩ 𓆝 𓆟 𓆞
-        <br>
-        🤍 ૮꒰ • ༝ • ꒱ა 🤍
+        𓆝 𓆟 𓆞
+        ♡
+        𓆝 𓆟 𓆞
     </div>
-
 
     <footer class="footer">
 
         <div class="footer-decor">
-            𓂃 ࣪˖ ִֶָ𐀔 𓂃 ࣪˖ ִֶָ𐀔 𓂃 ࣪˖ ִֶָ𐀔
+            🤍 ૮꒰ • ༝ • ꒱ა 🤍
         </div>
 
-        <p>
-            Made with love for the Miffy Club ♡
-        </p>
+        <div>
+            Made with love for the Miffy community
+        </div>
 
-        <p>
-            Stay cozy, play chess, and enjoy the Miffy vibes.
-        </p>
-
-        <p>
-            𓆩♡𓆪 Miffy Club 𓆩♡𓆪
-        </p>
+        <div>
+            M𝚒𝚏𝚏𝚢 𓆡 · Chess · Cozy vibes
+        </div>
 
     </footer>
 
 </main>
 
-
 <script>
 
-/* MEMBER COUNT */
+/* CALENDAR — INDEPENDENT FROM API */
+
+const calendarMonth =
+    document.getElementById("calendarMonth");
+
+const calendarDays =
+    document.getElementById("calendarDays");
+
+const previousMonth =
+    document.getElementById("previousMonth");
+
+const nextMonth =
+    document.getElementById("nextMonth");
+
+const visitorTime =
+    document.getElementById("visitorTime");
+
+const visitorCountry =
+    document.getElementById("visitorCountry");
+
+const visitorArea =
+    document.getElementById("visitorArea");
+
+const calendarToday = new Date();
+
+let calendarYear =
+    calendarToday.getFullYear();
+
+let calendarMonthIndex =
+    calendarToday.getMonth();
+
+const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+];
+
+function renderCalendar(){
+
+    calendarMonth.textContent =
+        monthNames[calendarMonthIndex] +
+        " " +
+        calendarYear;
+
+    calendarDays.innerHTML = "";
+
+    const firstDay =
+        new Date(
+            calendarYear,
+            calendarMonthIndex,
+            1
+        ).getDay();
+
+    const daysInMonth =
+        new Date(
+            calendarYear,
+            calendarMonthIndex + 1,
+            0
+        ).getDate();
+
+    for(let i = 0; i < firstDay; i++){
+
+        const emptyDay =
+            document.createElement("div");
+
+        emptyDay.className =
+            "calendar-day empty";
+
+        calendarDays.appendChild(emptyDay);
+
+    }
+
+    for(let day = 1; day <= daysInMonth; day++){
+
+        const dayElement =
+            document.createElement("div");
+
+        dayElement.className =
+            "calendar-day";
+
+        dayElement.textContent = day;
+
+        if(
+            day === calendarToday.getDate() &&
+            calendarMonthIndex === calendarToday.getMonth() &&
+            calendarYear === calendarToday.getFullYear()
+        ){
+
+            dayElement.classList.add("today");
+
+        }
+
+        calendarDays.appendChild(dayElement);
+
+    }
+
+}
+
+previousMonth.addEventListener(
+    "click",
+    function(){
+
+        calendarMonthIndex--;
+
+        if(calendarMonthIndex < 0){
+
+            calendarMonthIndex = 11;
+            calendarYear--;
+
+        }
+
+        renderCalendar();
+
+    }
+);
+
+nextMonth.addEventListener(
+    "click",
+    function(){
+
+        calendarMonthIndex++;
+
+        if(calendarMonthIndex > 11){
+
+            calendarMonthIndex = 0;
+            calendarYear++;
+
+        }
+
+        renderCalendar();
+
+    }
+);
+
+
+/* VISITOR LOCAL TIME */
+
+const timezoneCountryMap = {
+
+    "Asia/Kolkata":"India",
+    "Asia/Calcutta":"India",
+    "Asia/Karachi":"Pakistan",
+    "Asia/Dhaka":"Bangladesh",
+    "Asia/Kathmandu":"Nepal",
+    "Asia/Colombo":"Sri Lanka",
+    "Asia/Tokyo":"Japan",
+    "Asia/Seoul":"South Korea",
+    "Asia/Shanghai":"China",
+    "Asia/Hong_Kong":"Hong Kong",
+    "Asia/Singapore":"Singapore",
+    "Asia/Bangkok":"Thailand",
+    "Asia/Jakarta":"Indonesia",
+    "Asia/Manila":"Philippines",
+    "Europe/London":"United Kingdom",
+    "Europe/Paris":"France",
+    "Europe/Berlin":"Germany",
+    "Europe/Madrid":"Spain",
+    "Europe/Rome":"Italy",
+    "Europe/Amsterdam":"Netherlands",
+    "Europe/Moscow":"Russia",
+    "America/New_York":"United States",
+    "America/Chicago":"United States",
+    "America/Denver":"United States",
+    "America/Los_Angeles":"United States",
+    "America/Toronto":"Canada",
+    "America/Vancouver":"Canada",
+    "America/Mexico_City":"Mexico",
+    "Australia/Sydney":"Australia",
+    "Australia/Melbourne":"Australia",
+    "Australia/Perth":"Australia",
+    "Pacific/Auckland":"New Zealand",
+    "Africa/Cairo":"Egypt",
+    "Africa/Johannesburg":"South Africa",
+    "Africa/Nairobi":"Kenya"
+
+};
+
+const timezoneAreaMap = {
+
+    "Asia/Kolkata":"Kolkata",
+    "Asia/Calcutta":"Kolkata",
+    "Asia/Karachi":"Karachi",
+    "Asia/Dhaka":"Dhaka",
+    "Asia/Kathmandu":"Kathmandu",
+    "Asia/Colombo":"Colombo",
+    "Asia/Tokyo":"Tokyo",
+    "Asia/Seoul":"Seoul",
+    "Asia/Shanghai":"Shanghai",
+    "Asia/Hong_Kong":"Hong Kong",
+    "Asia/Singapore":"Singapore",
+    "Asia/Bangkok":"Bangkok",
+    "Asia/Jakarta":"Jakarta",
+    "Asia/Manila":"Manila",
+    "Europe/London":"London",
+    "Europe/Paris":"Paris",
+    "Europe/Berlin":"Berlin",
+    "Europe/Madrid":"Madrid",
+    "Europe/Rome":"Rome",
+    "Europe/Amsterdam":"Amsterdam",
+    "Europe/Moscow":"Moscow",
+    "America/New_York":"New York",
+    "America/Chicago":"Chicago",
+    "America/Denver":"Denver",
+    "America/Los_Angeles":"Los Angeles",
+    "America/Toronto":"Toronto",
+    "America/Vancouver":"Vancouver",
+    "America/Mexico_City":"Mexico City",
+    "Australia/Sydney":"Sydney",
+    "Australia/Melbourne":"Melbourne",
+    "Australia/Perth":"Perth",
+    "Pacific/Auckland":"Auckland",
+    "Africa/Cairo":"Cairo",
+    "Africa/Johannesburg":"Johannesburg",
+    "Africa/Nairobi":"Nairobi"
+
+};
+
+function updateVisitorInfo(){
+
+    const now = new Date();
+
+    const timezone =
+        Intl.DateTimeFormat()
+        .resolvedOptions()
+        .timeZone || "";
+
+    visitorTime.textContent =
+        "Time: " +
+        now.toLocaleTimeString([],{
+            hour:"numeric",
+            minute:"2-digit",
+            second:"2-digit"
+        });
+
+    visitorCountry.textContent =
+        "Country: " +
+        (timezoneCountryMap[timezone] || "Unknown");
+
+    let area =
+        timezoneAreaMap[timezone];
+
+    if(!area && timezone.includes("/")){
+
+        area =
+            timezone
+            .split("/")
+            .pop()
+            .replace(/_/g," ");
+
+    }
+
+    visitorArea.textContent =
+        "Area: " +
+        (area || "Local");
+
+}
+
+renderCalendar();
+
+updateVisitorInfo();
+
+setInterval(
+    updateVisitorInfo,
+    1000
+);
+
+
+/* CHESS.COM MEMBER COUNT API */
 
 const memberCount =
     document.getElementById("memberCount");
@@ -1167,8 +1347,7 @@ async function updateMemberCount(){
             throw new Error("Could not load club data");
         }
 
-        const club =
-            await response.json();
+        const club = await response.json();
 
         if(
             club &&
@@ -1200,62 +1379,14 @@ async function updateMemberCount(){
 
 }
 
+updateMemberCount();
 
-/* NEWEST MEMBERS */
+setInterval(
+    updateMemberCount,
+    5 * 60 * 1000
+);
 
-const newest1 =
-    document.getElementById("newest1");
+</script>
 
-const newest2 =
-    document.getElementById("newest2");
-
-const newest3 =
-    document.getElementById("newest3");
-
-
-async function updateNewestMembers(){
-
-    try{
-
-        const response = await fetch(
-            "https://api.chess.com/pub/club/miffy-1/members",
-            {
-                cache:"no-store"
-            }
-        );
-
-        if(!response.ok){
-            throw new Error("Could not load members");
-        }
-
-        const data =
-            await response.json();
-
-        let members = [];
-
-        if(Array.isArray(data.all_time)){
-
-            members =
-                data.all_time;
-
-        }
-
-        members.sort(function(a,b){
-
-            return (
-                new Date(b.joined) -
-                new Date(a.joined)
-            );
-
-        });
-
-        const newest =
-            members.slice(0,3);
-
-        const elements = [
-            newest1,
-            newest2,
-            newest3
-        ];
-
-        elements
+</body>
+</html>
