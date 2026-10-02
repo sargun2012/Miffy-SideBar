@@ -6,993 +6,943 @@
 <title>Miffy Local Hub</title>
 
 <style>
-*{box-sizing:border-box}
-
-html,body{
-    margin:0;
-    padding:0;
-    min-height:100%;
+* {
+  box-sizing: border-box;
 }
 
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    color:#55545a;
-    overflow-x:hidden;
-    transition:background 1.8s ease;
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
 }
 
-/* =========================================================
-   VERY LIGHT TIME-OF-DAY THEMES
-   ========================================================= */
-
-body.morning{
-    background:
-        radial-gradient(circle at 20% 10%,#ffffff 0,#f8f8f8 35%,transparent 65%),
-        linear-gradient(145deg,#f4f4f4,#eeeeee,#fafafa);
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #55545a;
+  background: #f7f7f8;
+  transition: background 1s ease;
 }
 
-body.day{
-    background:
-        radial-gradient(circle at 50% 0%,#ffffff 0,#f7f7f7 45%,transparent 75%),
-        linear-gradient(145deg,#f1f1f1,#fafafa,#ededed);
+body.morning {
+  background: #fafafa;
 }
 
-body.sunset{
-    background:
-        radial-gradient(circle at 75% 15%,#fdfdfd 0,#f4f4f4 35%,transparent 70%),
-        linear-gradient(145deg,#eeeeee,#f7f7f7,#e9e9e9);
+body.day {
+  background: #f6f7f7;
 }
 
-body.night{
-    background:
-        radial-gradient(circle at 80% 5%,#ffffff 0,#f3f3f3 30%,transparent 70%),
-        linear-gradient(145deg,#e9e9e9,#f5f5f5,#e7e7e7);
+body.sunset {
+  background: #f8f7f6;
 }
 
-.page{
-    width:100%;
-    max-width:650px;
-    margin:0 auto;
-    padding:22px 14px 45px;
+body.night {
+  background: #f3f3f5;
 }
 
-/* =========================================================
-   HEADINGS
-   ========================================================= */
-
-.main-heading{
-    text-align:center;
-    font-size:clamp(2rem,8vw,3.2rem);
-    line-height:1;
-    font-weight:900;
-    white-space:nowrap;
-    margin:8px 0 24px;
-    color:#55545a;
+.page {
+  width: min(920px, 94%);
+  margin: 24px auto 50px;
 }
 
-.section-heading{
-    text-align:center;
-    font-size:clamp(1.7rem,6vw,2.35rem);
-    line-height:1.05;
-    font-weight:900;
-    white-space:nowrap;
-    margin:0 0 20px;
-    color:#5b5960;
+.card {
+  background: rgba(255,255,255,0.96);
+  border: 2px solid #dedee1;
+  border-radius: 30px;
+  padding: 30px 24px;
+  margin-bottom: 28px;
+  box-shadow: 0 4px 18px rgba(80,80,90,0.05);
 }
 
-/* =========================================================
-   GENERAL CARDS
-   ========================================================= */
-
-.data-card{
-    background:rgba(255,255,255,.78);
-    border:1px solid #dedee1;
-    border-radius:24px;
-    padding:22px;
-    margin-bottom:20px;
-    box-shadow:0 12px 32px rgba(90,90,95,.09);
-    transition:
-        background 1.8s ease,
-        border-color 1.8s ease,
-        box-shadow 1.8s ease;
+.main-heading {
+  margin: 0 0 25px;
+  text-align: center;
+  font-size: clamp(30px, 6vw, 58px);
+  line-height: 1.05;
+  white-space: nowrap;
+  color: #55545a;
+  font-weight: 800;
 }
 
-/* =========================================================
-   MEMBER COUNT
-   ========================================================= */
-
-.member-count{
-    text-align:center;
-    font-size:clamp(1.8rem,7vw,2.7rem);
-    font-weight:900;
-    color:#8b888e;
-    white-space:nowrap;
-    margin:8px 0 20px;
+.section-heading {
+  margin: 0 0 25px;
+  text-align: center;
+  font-size: clamp(27px, 5vw, 48px);
+  line-height: 1.05;
+  white-space: nowrap;
+  color: #66656b;
+  font-weight: 800;
 }
 
-.member-subtitle{
-    text-align:center;
-    color:#aaa8ad;
-    font-size:.76rem;
-    letter-spacing:1.5px;
-    font-weight:800;
+.member-count {
+  text-align: center;
+  font-size: clamp(48px, 10vw, 88px);
+  line-height: 1;
+  font-weight: 900;
+  color: #8d8c92;
+  margin: 12px 0;
 }
 
-/* =========================================================
-   NEW MEMBERS
-   ========================================================= */
-
-.members-list{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+.sub-title {
+  text-align: center;
+  font-size: clamp(18px, 3vw, 27px);
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #aaa9ae;
 }
 
-.member-row{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:13px 15px;
-    border-radius:15px;
-    background:#f7f7f7;
-    border:1px solid #e3e3e5;
+.status {
+  text-align: center;
+  font-size: 15px;
+  margin-top: 12px;
+  color: #aaa9ae;
+  min-height: 20px;
 }
 
-.member-number{
-    width:32px;
-    height:32px;
-    flex:none;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50%;
-    background:#e7e7e9;
-    color:#77757b;
-    font-weight:900;
+.members-list {
+  display: grid;
+  gap: 18px;
 }
 
-.member-name{
-    min-width:0;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    color:#5f5d63;
-    font-weight:750;
+.member {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #f8f8f9;
+  border: 2px solid #dedee1;
+  border-radius: 24px;
+  padding: 20px 22px;
+  min-height: 92px;
 }
 
-/* =========================================================
-   LOCAL TIME CARD
-   ========================================================= */
-
-.local-card{
-    position:relative;
-    overflow:hidden;
-    border-radius:28px;
-    padding:22px 18px 24px;
-    background:rgba(255,255,255,.84);
-    border:1px solid #dcdcdf;
-    box-shadow:
-        0 16px 42px rgba(80,80,85,.11),
-        inset 0 1px rgba(255,255,255,.9);
-    transition:
-        background 1.8s ease,
-        border-color 1.8s ease,
-        box-shadow 1.8s ease;
+.member-number {
+  flex: 0 0 54px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e9e9ec;
+  color: #77767d;
+  font-size: 25px;
+  font-weight: 800;
 }
 
-.local-card::before{
-    content:"";
-    position:absolute;
-    width:190px;
-    height:190px;
-    border-radius:50%;
-    top:-125px;
-    right:-65px;
-    background:rgba(255,255,255,.85);
-    filter:blur(12px);
-    pointer-events:none;
-    transition:background 1.8s ease;
+.member-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: clamp(19px, 4vw, 29px);
+  font-weight: 800;
+  color: #5e5d64;
 }
 
-.local-title{
-    position:relative;
-    z-index:1;
-    text-align:center;
-    font-size:clamp(1.8rem,6vw,2.45rem);
-    line-height:1;
-    font-weight:900;
-    letter-spacing:1px;
-    white-space:nowrap;
-    margin:0 0 20px;
-    color:#59575d;
+.member-date {
+  margin-left: auto;
+  white-space: nowrap;
+  color: #aaa9ae;
+  font-size: 14px;
 }
 
-/* =========================================================
-   CALENDAR
-   ========================================================= */
-
-.calendar{
-    position:relative;
-    z-index:1;
-    width:100%;
-    padding:16px;
-    border-radius:21px;
-    background:rgba(250,250,250,.92);
-    border:1px solid #dedee1;
-    transition:
-        background 1.8s ease,
-        border-color 1.8s ease;
+.local-card {
+  padding-bottom: 26px;
 }
 
-.calendar-header{
-    display:grid;
-    grid-template-columns:42px minmax(0,1fr) 42px;
-    align-items:center;
-    gap:8px;
-    width:100%;
-    margin-bottom:17px;
+.calendar-wrap {
+  border: 2px solid #dedee1;
+  border-radius: 28px;
+  padding: 18px;
+  background: #fbfbfc;
 }
 
-.calendar-header button{
-    width:42px;
-    height:42px;
-    padding:0;
-    border:1px solid #dedee1;
-    border-radius:50%;
-    background:#ffffff;
-    color:#68666c;
-    font-size:1.6rem;
-    line-height:1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    transition:
-        background .25s ease,
-        transform .15s ease,
-        border-color .25s ease;
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.calendar-header button:hover{
-    background:#f1f1f1;
+.month-button {
+  width: 52px;
+  height: 52px;
+  border: 2px solid #dedee1;
+  border-radius: 50%;
+  background: white;
+  color: #77767d;
+  font-size: 30px;
+  cursor: pointer;
 }
 
-.calendar-header button:active{
-    transform:scale(.93);
+.month-button:active {
+  transform: scale(.95);
 }
 
-.calendar-month{
-    text-align:center;
-    font-size:clamp(1.05rem,4.5vw,1.35rem);
-    font-weight:900;
-    line-height:1.1;
-    white-space:nowrap;
-    color:#5d5b61;
+.calendar-month {
+  flex: 1;
+  text-align: center;
+  font-size: clamp(21px, 4vw, 32px);
+  font-weight: 800;
+  color: #66656b;
+  white-space: nowrap;
 }
-
-/* Perfect seven-column alignment */
 
 .weekdays,
-.calendar-days{
-    display:grid;
-    grid-template-columns:repeat(7,minmax(0,1fr));
-    width:100%;
-    gap:5px;
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
-.weekdays{
-    margin-bottom:7px;
+.weekdays {
+  margin-top: 24px;
 }
 
-.weekdays span{
-    min-width:0;
-    text-align:center;
-    color:#aaa8ad;
-    font-size:.68rem;
-    line-height:30px;
-    font-weight:900;
-    white-space:nowrap;
+.weekdays div {
+  text-align: center;
+  color: #aaa9ae;
+  font-size: clamp(12px, 2.5vw, 17px);
+  font-weight: 800;
+  padding: 7px 0;
 }
 
-.calendar-days span{
-    width:100%;
-    aspect-ratio:1 / 1;
-    min-width:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:11px;
-    color:#77757b;
-    font-size:.82rem;
-    font-weight:750;
-    line-height:1;
+.calendar-days {
+  row-gap: 8px;
+  margin-top: 8px;
 }
 
-.calendar-days span.empty{
-    visibility:hidden;
+.calendar-day {
+  min-width: 0;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #65646a;
+  font-size: clamp(14px, 3vw, 18px);
+  font-weight: 700;
 }
 
-/* Today */
-
-.calendar-days span.today{
-    background:#d9d9db;
-    color:#444248;
-    font-weight:950;
-    box-shadow:
-        0 0 0 2px rgba(120,120,125,.12),
-        0 5px 15px rgba(100,100,105,.12);
+.calendar-day.empty {
+  visibility: hidden;
 }
 
-/* =========================================================
-   LIVE TIME
-   ========================================================= */
-
-.local-time{
-    position:relative;
-    z-index:1;
-    text-align:center;
-    margin-top:23px;
-    font-size:clamp(2rem,9vw,3rem);
-    line-height:1;
-    font-weight:950;
-    letter-spacing:1px;
-    color:#66646a;
-    white-space:nowrap;
+.calendar-day.today span {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #e3e3e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #55545a;
+  font-weight: 900;
 }
 
-.local-date{
-    position:relative;
-    z-index:1;
-    text-align:center;
-    margin-top:9px;
-    color:#99979d;
-    font-size:.9rem;
-    font-weight:650;
-    white-space:nowrap;
+.local-time {
+  text-align: center;
+  margin-top: 28px;
+  font-size: clamp(38px, 9vw, 70px);
+  font-weight: 900;
+  color: #5c5b62;
+  line-height: 1;
 }
 
-/* =========================================================
-   COUNTRY / AREA
-   ========================================================= */
-
-.location-info{
-    position:relative;
-    z-index:1;
-    margin-top:22px;
-    padding-top:16px;
-    border-top:1px solid #e0e0e2;
-    display:flex;
-    flex-direction:column;
-    gap:5px;
+.local-date {
+  text-align: center;
+  margin-top: 12px;
+  font-size: clamp(17px, 3vw, 25px);
+  font-weight: 700;
+  color: #88878d;
 }
 
-.location-row{
-    display:grid;
-    grid-template-columns:36px minmax(0,1fr);
-    align-items:center;
-    gap:10px;
-    min-height:52px;
+.location-info {
+  margin-top: 22px;
+  display: grid;
+  gap: 10px;
 }
 
-.location-icon{
-    width:36px;
-    height:36px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:11px;
-    background:#eeeeef;
-    font-size:1.1rem;
+.location-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  flex-wrap: wrap;
+  color: #77767d;
+  font-size: clamp(14px, 2.8vw, 18px);
+  font-weight: 700;
+  text-align: center;
 }
 
-.location-text{
-    min-width:0;
+.location-icon {
+  color: #9a999f;
 }
 
-.location-text small{
-    display:block;
-    color:#aaa8ad;
-    font-size:.61rem;
-    letter-spacing:1.3px;
-    line-height:1.1;
-    font-weight:900;
-    white-space:nowrap;
+.loading {
+  color: #aaa9ae;
 }
 
-.location-text strong{
-    display:block;
-    margin-top:4px;
-    color:#66646a;
-    font-size:.84rem;
-    line-height:1.2;
-    font-weight:750;
-    overflow-wrap:anywhere;
+.error {
+  color: #a5a4a9;
 }
 
-.status{
-    position:relative;
-    z-index:1;
-    text-align:center;
-    margin-top:16px;
-    color:#aaa8ad;
-    font-size:.65rem;
-    letter-spacing:1.2px;
-    font-weight:850;
-    white-space:nowrap;
-}
+@media (max-width: 520px) {
+  .page {
+    width: 94%;
+    margin-top: 12px;
+  }
 
-/* =========================================================
-   SUBTLE TIME-OF-DAY CHANGES
-   All remain GREY + WHITE.
-   ========================================================= */
+  .card {
+    padding: 25px 15px;
+    border-radius: 27px;
+  }
 
-/* Morning: brightest */
+  .member {
+    padding: 17px 15px;
+    gap: 13px;
+  }
 
-.morning .local-card{
-    background:rgba(255,255,255,.92);
-    border-color:#e4e4e4;
-    box-shadow:0 16px 42px rgba(180,180,180,.12);
-}
+  .member-number {
+    flex-basis: 48px;
+    width: 48px;
+    height: 48px;
+    font-size: 21px;
+  }
 
-.morning .calendar{
-    background:#ffffff;
-}
+  .member-date {
+    display: none;
+  }
 
-/* Day: clean white */
+  .calendar-wrap {
+    padding: 12px 8px;
+  }
 
-.day .local-card{
-    background:rgba(255,255,255,.88);
-    border-color:#dcdcdf;
-}
+  .month-button {
+    width: 46px;
+    height: 46px;
+    font-size: 27px;
+  }
 
-.day .calendar{
-    background:#fafafa;
-}
+  .calendar-day {
+    height: 42px;
+  }
 
-/* Sunset: slightly warmer-looking neutral grey */
-
-.sunset .local-card{
-    background:rgba(249,249,249,.90);
-    border-color:#d9d9db;
-    box-shadow:0 16px 42px rgba(145,145,145,.13);
-}
-
-.sunset .calendar{
-    background:#f7f7f7;
-}
-
-/* Night: slightly cooler grey, still very light */
-
-.night .local-card{
-    background:rgba(242,242,243,.94);
-    border-color:#d4d4d7;
-    box-shadow:0 16px 42px rgba(90,90,95,.15);
-}
-
-.night .calendar{
-    background:#eeeeef;
-}
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media(max-width:430px){
-
-    .page{
-        padding-left:10px;
-        padding-right:10px;
-    }
-
-    .data-card{
-        padding:17px;
-        border-radius:21px;
-    }
-
-    .local-card{
-        padding:18px 12px 20px;
-        border-radius:23px;
-    }
-
-    .calendar{
-        padding:12px 8px;
-    }
-
-    .weekdays,
-    .calendar-days{
-        gap:3px;
-    }
-
-    .weekdays span{
-        font-size:.59rem;
-    }
-
-    .calendar-days span{
-        font-size:.74rem;
-        border-radius:9px;
-    }
-
-    .calendar-header{
-        grid-template-columns:38px minmax(0,1fr) 38px;
-    }
-
-    .calendar-header button{
-        width:38px;
-        height:38px;
-    }
-
-    .local-date{
-        font-size:.78rem;
-    }
-}
-
-@media(max-width:350px){
-
-    .weekdays span{
-        font-size:.54rem;
-    }
-
-    .calendar-days span{
-        font-size:.68rem;
-    }
-
-    .calendar{
-        padding-left:5px;
-        padding-right:5px;
-    }
+  .calendar-day.today span {
+    width: 38px;
+    height: 38px;
+  }
 }
 </style>
 </head>
 
 <body>
-
 <div class="page">
 
-    <div class="main-heading">
-        🤍 Miffy Local Hub 🤍
+  <!-- MEMBER COUNT -->
+  <section class="card">
+    <h1 class="main-heading">✨ Miffy Members ✨</h1>
+
+    <div id="memberCount" class="member-count loading">Loading...</div>
+
+    <div class="sub-title">LIVE CLUB DATA</div>
+    <div id="memberStatus" class="status">Connecting to Chess.com...</div>
+  </section>
+
+
+  <!-- NEWEST MEMBERS -->
+  <section class="card">
+    <h2 class="section-heading">🌱 Newest Members 🌱</h2>
+
+    <div id="membersList" class="members-list">
+      <div class="member">
+        <div class="member-number">1</div>
+        <div class="member-name loading">Loading...</div>
+      </div>
+
+      <div class="member">
+        <div class="member-number">2</div>
+        <div class="member-name loading">Loading...</div>
+      </div>
+
+      <div class="member">
+        <div class="member-number">3</div>
+        <div class="member-name loading">Loading...</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- LOCAL TIME -->
+  <section class="card local-card">
+    <h2 class="section-heading">🌙 LOCAL TIME 🌙</h2>
+
+    <div class="calendar-wrap">
+
+      <div class="calendar-header">
+        <button class="month-button" id="prevMonth" type="button" aria-label="Previous month">
+          ‹
+        </button>
+
+        <div class="calendar-month" id="calendarMonth">
+          Loading...
+        </div>
+
+        <button class="month-button" id="nextMonth" type="button" aria-label="Next month">
+          ›
+        </button>
+      </div>
+
+      <div class="weekdays">
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+      </div>
+
+      <div class="calendar-days" id="calendarDays"></div>
+
     </div>
 
-    <!-- MEMBER COUNT -->
+    <div id="localTime" class="local-time">Loading...</div>
+    <div id="localDate" class="local-date">Loading...</div>
 
-    <div class="data-card">
+    <div class="location-info">
+      <div class="location-row">
+        <span class="location-icon">🌍</span>
+        <span id="country">Loading...</span>
+      </div>
 
-        <div class="section-heading">
-            ✨ Miffy Members ✨
-        </div>
+      <div class="location-row">
+        <span class="location-icon">📍</span>
+        <span id="area">Loading...</span>
+      </div>
 
-        <div
-            class="member-count"
-            id="memberCount">
-            Loading...
-        </div>
-
-        <div class="member-subtitle">
-            LIVE CLUB DATA
-        </div>
-
+      <div class="location-row">
+        <span class="location-icon">🕐</span>
+        <span id="timezone">Loading...</span>
+      </div>
     </div>
-
-    <!-- NEWEST MEMBERS -->
-
-    <div class="data-card">
-
-        <div class="section-heading">
-            🌱 Newest Members 🌱
-        </div>
-
-        <div
-            class="members-list"
-            id="membersList">
-
-            <div class="member-row">
-                <div class="member-number">1</div>
-                <div class="member-name">Loading...</div>
-            </div>
-
-            <div class="member-row">
-                <div class="member-number">2</div>
-                <div class="member-name">Loading...</div>
-            </div>
-
-            <div class="member-row">
-                <div class="member-number">3</div>
-                <div class="member-name">Loading...</div>
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- LOCAL TIME -->
-
-    <div class="local-card">
-
-        <div class="local-title">
-            🌙 LOCAL TIME 🌙
-        </div>
-
-        <div class="calendar">
-
-            <div class="calendar-header">
-
-                <button
-                    type="button"
-                    id="prevMonth"
-                    aria-label="Previous month">
-                    ‹
-                </button>
-
-                <div
-                    class="calendar-month"
-                    id="calendarMonth">
-                    Loading...
-                </div>
-
-                <button
-                    type="button"
-                    id="nextMonth"
-                    aria-label="Next month">
-                    ›
-                </button>
-
-            </div>
-
-            <div class="weekdays">
-                <span>Sun</span>
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
-            </div>
-
-            <div
-                class="calendar-days"
-                id="calendarDays">
-            </div>
-
-        </div>
-
-        <div
-            class="local-time"
-            id="localTime">
-            --:--:--
-        </div>
-
-        <div
-            class="local-date"
-            id="localDate">
-            Loading date...
-        </div>
-
-        <div class="location-info">
-
-            <div class="location-row">
-
-                <div class="location-icon">
-                    🌍
-                </div>
-
-                <div class="location-text">
-
-                    <small>COUNTRY</small>
-
-                    <strong id="localCountry">
-                        Detecting...
-                    </strong>
-
-                </div>
-
-            </div>
-
-            <div class="location-row">
-
-                <div class="location-icon">
-                    📍
-                </div>
-
-                <div class="location-text">
-
-                    <small>AREA / TIMEZONE</small>
-
-                    <strong id="localArea">
-                        Detecting...
-                    </strong>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div
-            class="status"
-            id="timeStatus">
-            LOCAL TIME • UPDATING LIVE
-        </div>
-
-    </div>
+  </section>
 
 </div>
 
+
 <script>
+"use strict";
+
+/*
+  Miffy Club
+  Chess.com URL-ID:
+*/
 const MIFFY_CLUB = "miffy-1";
 
-/* =========================================================
-   JSONP
-   ========================================================= */
+/*
+  IMPORTANT:
+  Chess.com PubAPI officially supports JSONP.
+  We use one request at a time because Chess.com
+  documents that parallel requests may trigger 429.
+*/
+function jsonp(url, timeout = 12000) {
+  return new Promise((resolve, reject) => {
+    const callbackName =
+      "__miffyCallback_" +
+      Date.now() +
+      "_" +
+      Math.random().toString(36).slice(2);
 
-function jsonp(url){
+    const script = document.createElement("script");
+    let finished = false;
 
-    return new Promise(function(resolve,reject){
+    function cleanup() {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
 
-        const callbackName =
-            "miffyCallback_" +
-            Date.now() +
-            "_" +
-            Math.floor(Math.random()*10000);
+      try {
+        delete window[callbackName];
+      } catch (_) {
+        window[callbackName] = undefined;
+      }
+    }
 
-        const script =
-            document.createElement("script");
+    const timer = setTimeout(() => {
+      if (finished) return;
 
-        const separator =
-            url.includes("?") ? "&" : "?";
+      finished = true;
+      cleanup();
 
-        const timeout =
-            setTimeout(function(){
+      reject(new Error("Chess.com API timed out"));
+    }, timeout);
 
-                cleanup();
+    window[callbackName] = function(data) {
+      if (finished) return;
 
-                reject(
-                    new Error("Request timed out")
-                );
+      finished = true;
+      clearTimeout(timer);
+      cleanup();
 
-            },15000);
+      resolve(data);
+    };
 
-        function cleanup(){
+    script.onerror = function() {
+      if (finished) return;
 
-            clearTimeout(timeout);
+      finished = true;
+      clearTimeout(timer);
+      cleanup();
 
-            if(script.parentNode){
-                script.parentNode.removeChild(script);
-            }
+      reject(new Error("Chess.com API request failed"));
+    };
 
-            try{
-                delete window[callbackName];
-            }catch(e){
-                window[callbackName] = undefined;
-            }
+    /*
+      Cache-buster prevents the browser from keeping
+      an old JSONP script response.
+    */
+    const separator = url.includes("?") ? "&" : "?";
+
+    script.src =
+      url +
+      separator +
+      "callback=" +
+      encodeURIComponent(callbackName) +
+      "&_=" +
+      Date.now();
+
+    document.head.appendChild(script);
+  });
+}
+
+
+/* ---------------- MEMBER COUNT ---------------- */
+
+async function updateMemberCount() {
+  const countElement = document.getElementById("memberCount");
+  const statusElement = document.getElementById("memberStatus");
+
+  try {
+    const data = await jsonp(
+      "https://api.chess.com/pub/club/" + MIFFY_CLUB
+    );
+
+    if (
+      data &&
+      typeof data.members_count === "number"
+    ) {
+      countElement.textContent =
+        data.members_count.toLocaleString();
+
+      countElement.classList.remove("loading");
+
+      statusElement.textContent =
+        "Updated from Chess.com PubAPI";
+    } else {
+      throw new Error("Member count unavailable");
+    }
+
+  } catch (error) {
+    console.error(error);
+
+    countElement.textContent = "—";
+    countElement.classList.remove("loading");
+
+    statusElement.textContent =
+      "Chess.com data is temporarily unavailable";
+  }
+}
+
+
+/* ---------------- NEWEST MEMBERS ---------------- */
+
+function escapeHTML(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+function formatJoined(timestamp) {
+  if (!timestamp) return "";
+
+  const date = new Date(timestamp * 1000);
+
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+
+  return date.toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
+}
+
+
+async function updateNewestMembers() {
+  const list = document.getElementById("membersList");
+
+  try {
+    const data = await jsonp(
+      "https://api.chess.com/pub/club/" +
+      MIFFY_CLUB +
+      "/members"
+    );
+
+    const allMembers = [];
+
+    /*
+      PubAPI provides weekly/monthly/all_time
+      member lists. Combine them so that we have
+      the best chance of finding the newest joins.
+    */
+    const groups = [
+      data && data.weekly,
+      data && data.monthly,
+      data && data.all_time
+    ];
+
+    groups.forEach(group => {
+      if (!Array.isArray(group)) return;
+
+      group.forEach(member => {
+        if (
+          member &&
+          member.username &&
+          typeof member.joined === "number"
+        ) {
+          allMembers.push(member);
         }
-
-        window[callbackName] =
-            function(data){
-
-                cleanup();
-                resolve(data);
-
-            };
-
-        script.onerror =
-            function(){
-
-                cleanup();
-
-                reject(
-                    new Error("API request failed")
-                );
-
-            };
-
-        script.src =
-            url +
-            separator +
-            "callback=" +
-            encodeURIComponent(callbackName);
-
-        document.head.appendChild(script);
+      });
     });
-}
 
-/* =========================================================
-   MEMBER COUNT
-   ========================================================= */
+    /*
+      Remove duplicate usernames.
+    */
+    const unique = new Map();
 
-async function updateMemberCount(){
+    allMembers.forEach(member => {
+      const key = member.username.toLowerCase();
 
-    const element =
-        document.getElementById("memberCount");
+      const previous = unique.get(key);
 
-    try{
+      if (
+        !previous ||
+        member.joined > previous.joined
+      ) {
+        unique.set(key, member);
+      }
+    });
 
-        const data =
-            await jsonp(
-                "https://api.chess.com/pub/club/" +
-                MIFFY_CLUB
-            );
+    const newest = Array.from(unique.values())
+      .sort((a, b) => b.joined - a.joined)
+      .slice(0, 3);
 
-        const count =
-            Number(
-                data &&
-                data.members_count
-            );
-
-        if(Number.isFinite(count)){
-
-            element.textContent =
-                "✨ " +
-                count.toLocaleString() +
-                " Members ✨";
-
-        }else{
-
-            element.textContent =
-                "✨ Miffy Club ✨";
-        }
-
-    }catch(error){
-
-        console.log(
-            "Member count unavailable:",
-            error
-        );
-
-        element.textContent =
-            "✨ Miffy Club ✨";
+    if (!newest.length) {
+      throw new Error("No member data returned");
     }
-}
 
-/* =========================================================
-   NEWEST MEMBERS
-   ========================================================= */
+    list.innerHTML = "";
 
-async function updateNewestMembers(){
+    newest.forEach((member, index) => {
+      const row = document.createElement("div");
+      row.className = "member";
 
-    const list =
-        document.getElementById("membersList");
+      const number = document.createElement("div");
+      number.className = "member-number";
+      number.textContent = index + 1;
 
-    try{
+      const name = document.createElement("div");
+      name.className = "member-name";
+      name.textContent = member.username;
 
-        const data =
-            await jsonp(
-                "https://api.chess.com/pub/club/" +
-                MIFFY_CLUB +
-                "/members"
-            );
+      const date = document.createElement("div");
+      date.className = "member-date";
+      date.textContent = formatJoined(member.joined);
 
-        let members =
-            data &&
-            Array.isArray(data.all_time)
-                ? data.all_time
-                : [];
+      row.appendChild(number);
+      row.appendChild(name);
+      row.appendChild(date);
 
-        members.sort(
-            function(a,b){
-                return Number(b.joined || 0) -
-                       Number(a.joined || 0);
-            }
-        );
+      list.appendChild(row);
+    });
 
-        members =
-            members.slice(0,3);
+  } catch (error) {
+    console.error(error);
 
-        list.innerHTML = "";
+    list.innerHTML = "";
 
-        for(let i=0;i<3;i++){
+    for (let i = 1; i <= 3; i++) {
+      const row = document.createElement("div");
+      row.className = "member";
 
-            const row =
-                document.createElement("div");
+      row.innerHTML =
+        '<div class="member-number">' +
+        i +
+        '</div>' +
+        '<div class="member-name error">' +
+        'Unavailable' +
+        '</div>';
 
-            row.className =
-                "member-row";
-
-            const member =
-                members[i];
-
-            row.innerHTML =
-                '<div class="member-number">' +
-                (i+1) +
-                '</div>' +
-                '<div class="member-name">' +
-                (
-                    member
-                        ? escapeHTML(
-                            member.username ||
-                            "Unknown member"
-                          )
-                        : "—"
-                ) +
-                '</div>';
-
-            list.appendChild(row);
-        }
-
-    }catch(error){
-
-        console.log(
-            "Newest members unavailable:",
-            error
-        );
-
-        list.innerHTML = "";
-
-        for(let i=1;i<=3;i++){
-
-            const row =
-                document.createElement("div");
-
-            row.className =
-                "member-row";
-
-            row.innerHTML =
-                '<div class="member-number">' +
-                i +
-                '</div>' +
-                '<div class="member-name">' +
-                'Unable to load' +
-                '</div>';
-
-            list.appendChild(row);
-        }
+      list.appendChild(row);
     }
+  }
 }
 
-function escapeHTML(value){
 
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-}
-
-/* =========================================================
-   CALENDAR
-   ========================================================= */
+/* ---------------- CALENDAR ---------------- */
 
 const monthNames = [
-    "January","February","March","April",
-    "May","June","July","August",
-    "September","October","November","December"
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
 ];
 
 let calendarDate = new Date();
 
-function renderCalendar(){
 
-    const year =
-        calendarDate.getFullYear();
+function renderCalendar() {
+  const year = calendarDate.getFullYear();
+  const month = calendarDate.getMonth();
 
-    const month =
-        calendarDate.getMonth();
+  document.getElementById("calendarMonth").textContent =
+    monthNames[month] + " " + year;
 
-    document.getElementById(
-        "calendarMonth"
-    ).textContent =
-        monthNames[month] +
-        " " +
-        year;
+  const container =
+    document.getElementById("calendarDays");
 
-    const container =
-        document.getElementById(
-            "calendarDays"
-        );
+  container.innerHTML = "";
 
-    container.innerHTML = "";
+  const firstDay =
+    new Date(year, month, 1).getDay();
 
-    const firstDay =
-        new Date(
-            year,
-            month,
-            1
-        ).getDay();
+  const daysInMonth =
+    new Date(year, month + 1, 0).getDate();
 
-    const daysInMonth =
-        new Date(
-            year,
-            month + 1,
-            0
-        ).getDate();
+  const today = new Date();
 
-    
+  for (let i = 0; i < firstDay; i++) {
+    const empty = document.createElement("div");
+    empty.className = "calendar-day empty";
+    empty.innerHTML = "<span>0</span>";
+    container.appendChild(empty);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const cell = document.createElement("div");
+    cell.className = "calendar-day";
+
+    const isToday =
+      day === today.getDate() &&
+      month === today.getMonth() &&
+      year === today.getFullYear();
+
+    if (isToday) {
+      cell.classList.add("today");
+    }
+
+    const span = document.createElement("span");
+    span.textContent = day;
+
+    cell.appendChild(span);
+    container.appendChild(cell);
+  }
+}
+
+
+document.getElementById("prevMonth")
+  .addEventListener("click", () => {
+    calendarDate.setMonth(
+      calendarDate.getMonth() - 1
+    );
+
+    renderCalendar();
+  });
+
+
+document.getElementById("nextMonth")
+  .addEventListener("click", () => {
+    calendarDate.setMonth(
+      calendarDate.getMonth() + 1
+    );
+
+    renderCalendar();
+  });
+
+
+/* ---------------- LOCAL TIME ---------------- */
+
+const timezoneCountryMap = {
+  "Asia/Kolkata": "India",
+  "Asia/Calcutta": "India",
+
+  "Asia/Dhaka": "Bangladesh",
+  "Asia/Kathmandu": "Nepal",
+  "Asia/Karachi": "Pakistan",
+  "Asia/Colombo": "Sri Lanka",
+
+  "Asia/Tokyo": "Japan",
+  "Asia/Seoul": "South Korea",
+  "Asia/Shanghai": "China",
+  "Asia/Hong_Kong": "Hong Kong",
+  "Asia/Singapore": "Singapore",
+  "Asia/Bangkok": "Thailand",
+  "Asia/Jakarta": "Indonesia",
+  "Asia/Manila": "Philippines",
+
+  "Europe/London": "United Kingdom",
+  "Europe/Paris": "France",
+  "Europe/Berlin": "Germany",
+  "Europe/Rome": "Italy",
+  "Europe/Madrid": "Spain",
+
+  "America/New_York": "United States",
+  "America/Chicago": "United States",
+  "America/Denver": "United States",
+  "America/Los_Angeles": "United States",
+
+  "America/Toronto": "Canada",
+  "America/Vancouver": "Canada",
+
+  "Australia/Sydney": "Australia",
+  "Australia/Melbourne": "Australia",
+  "Pacific/Auckland": "New Zealand"
+};
+
+
+function getCountryFromTimezone(timezone) {
+  if (timezoneCountryMap[timezone]) {
+    return timezoneCountryMap[timezone];
+  }
+
+  const parts = timezone.split("/");
+
+  if (parts.length > 1) {
+    return parts[0];
+  }
+
+  return "Unknown";
+}
+
+
+function getAreaFromTimezone(timezone) {
+  const parts = timezone.split("/");
+
+  if (parts.length >= 2) {
+    return parts
+      .slice(1)
+      .join(" / ")
+      .replaceAll("_", " ");
+  }
+
+  return timezone;
+}
+
+
+function getTimeTheme(hour) {
+  if (hour >= 5 && hour < 8) {
+    return "morning";
+  }
+
+  if (hour >= 8 && hour < 17) {
+    return "day";
+  }
+
+  if (hour >= 17 && hour < 20) {
+    return "sunset";
+  }
+
+  return "night";
+}
+
+
+function updateLocalInfo() {
+  const now = new Date();
+
+  const timezone =
+    Intl.DateTimeFormat().resolvedOptions().timeZone ||
+    "Local timezone";
+
+  const hour = Number(
+    new Intl.DateTimeFormat(undefined, {
+      hour: "numeric",
+      hour12: false
+    }).format(now)
+  );
+
+  document.body.classList.remove(
+    "morning",
+    "day",
+    "sunset",
+    "night"
+  );
+
+  document.body.classList.add(
+    getTimeTheme(hour)
+  );
+
+  document.getElementById("localTime").textContent =
+    now.toLocaleTimeString(undefined, {
+      hour: "numeric",
+      minute: "2-digit",
+      second: "2-digit"
+    });
+
+  document.getElementById("localDate").textContent =
+    now.toLocaleDateString(undefined, {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+
+  document.getElementById("country").textContent =
+    getCountryFromTimezone(timezone);
+
+  document.getElementById("area").textContent =
+    getAreaFromTimezone(timezone);
+
+  document.getElementById("timezone").textContent =
+    timezone;
+}
+
+
+/* ---------------- START ---------------- */
+
+renderCalendar();
+updateLocalInfo();
+
+setInterval(updateLocalInfo, 1000);
+
+/*
+  Run requests one after another.
+  This avoids sending parallel PubAPI requests.
+*/
+(async function loadChessData() {
+  await updateMemberCount();
+  await updateNewestMembers();
+})();
+
+/*
+  PubAPI responses can be cached by Chess.com
+  for up to 12 hours, so repeatedly requesting
+  the API does not necessarily mean the displayed
+  member count changes immediately.
+*/
+setInterval(async () => {
+  await updateMemberCount();
+  await updateNewestMembers();
+}, 5 * 60 * 1000);
+</script>
+
+</body>
+</html>    
