@@ -502,7 +502,126 @@ h1{
 }
 
 /* SWEETS */
+/* UNLIMITED PUZZLES */
 
+.puzzle-box{
+    text-align:center;
+}
+
+.puzzle-board{
+    width:min(520px,100%);
+    aspect-ratio:1;
+    margin:0 auto 20px;
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 28px rgba(80,70,70,.12);
+    border:5px solid #eee7e3;
+}
+
+.puzzle-square{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    aspect-ratio:1;
+    cursor:pointer;
+    user-select:none;
+    -webkit-user-select:none;
+}
+
+.puzzle-square.light{
+    background:#f3e8dc;
+}
+
+.puzzle-square.dark{
+    background:#b9a49a;
+}
+
+.puzzle-square.selected{
+    box-shadow:inset 0 0 0 4px rgba(255,255,255,.75);
+}
+
+.puzzle-loading{
+    color:#9b8983;
+    font-size:.95rem;
+    margin-bottom:15px;
+}
+
+.puzzle-status{
+    min-height:30px;
+    margin:10px auto 17px;
+    color:#806e69;
+    font-weight:bold;
+    font-size:1rem;
+    line-height:1.5;
+}
+
+.puzzle-controls{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.puzzle-button{
+    border:0;
+    border-radius:25px;
+    padding:12px 22px;
+    background:#eee6e1;
+    color:#705f5a;
+    font-family:inherit;
+    font-size:.95rem;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.puzzle-button:hover{
+    background:#e1d7d1;
+    transform:translateY(-1px);
+}
+
+.puzzle-button.primary{
+    background:#e5f0e5;
+    color:#55735a;
+}
+
+.puzzle-button.primary:hover{
+    background:#d8e8d8;
+}
+
+@media(max-width:700px){
+
+    .puzzle-board{
+        border-width:3px;
+        border-radius:14px;
+    }
+
+    .puzzle-status{
+        font-size:.92rem;
+    }
+
+    .puzzle-button{
+        padding:11px 17px;
+        font-size:.88rem;
+    }
+
+}
+
+@media(max-width:420px){
+
+    .puzzle-board{
+        border-radius:11px;
+    }
+
+    .puzzle-button{
+        padding:10px 14px;
+        font-size:.82rem;
+    }
+
+}
 .sweets{
     display:grid;
     grid-template-columns:1fr 1fr;
