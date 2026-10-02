@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Miffy Club Test</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 18px;
+    background: linear-gradient(145deg, #eeeeee, #ffffff, #dedede);
+    font-family: Georgia, "Times New Roman", serif;
+    color: #756864;
+}
+
+.container {
+    width: 100%;
+    max-width: 650px;
+    margin: auto;
+}
+
+.header {
+    text-align: center;
+    padding: 15px 5px 25px;
+}
+
+.title {
+    margin: 0;
+    color: #8d7771;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.subtitle {
+    margin-top: 8px;
+    color: #aa9a94;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.bunny {
+    margin-top: 12px;
+    font-size: 20px;
+}
+
+.card {
+    margin: 18px 0;
+    padding: 24px 18px;
+    background: rgba(255,255,255,.9);
+    border: 1px solid #e6dcd8;
+    border-radius: 24px;
+    box-shadow: 0 8px 25px rgba(110,90,85,.08);
+    text-align: center;
+}
+
+.icon {
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.label {
+    color: #aa918a;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#memberCount {
+    margin-top: 14px;
+    color: #c7b66f;
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.member {
+    padding: 12px 5px;
+    border-bottom: 1px solid #eee7e3;
+    font-size: 14px;
+}
+
+.member:last-child {
+    border-bottom: none;
+}
+
+.member a {
+    color: #907a73;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.member a:hover {
+    text-decoration: underline;
+}
+
+.member-date {
+    margin-left: 6px;
+    color: #b4a7a2;
+    font-size: 11px;
+}
+
+.loading {
+    color: #b5aaa5;
+    font-size: 13px;
+    padding: 10px;
+}
+
+#day {
+    margin-top: 12px;
+    color: #b7a465;
+    font-size: 52px;
+    font-weight: bold;
+}
+
+#month {
+    color: #81716c;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+#weekday {
+    margin-top: 5px;
+    color: #aa9d98;
+    font-size: 13px;
+}
+
+#time {
+    margin-top: 15px;
+    padding-top: 13px;
+    border-top: 1px solid #eee6e2;
+    color: #9b8c87;
+    font-size: 16px;
+}
+
+#timezone {
+    margin-top: 5px;
+    color: #b5aaa5;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1 class="title">
+            M𝚒𝚏𝚏𝚢 𓆡
+        </h1>
+
+        <div class="subtitle">
+            MIFFY CLUB • LIVE EXPERIMENT
+        </div>
+
+        <div class="bunny">
+            🤍 ૮꒰ • ༝ • ꒱ა 🤍
+        </div>
+
+    </div>
+
+
+    <!-- MEMBER COUNT -->
+
+    <div class="card">
+
+        <div class="icon">✨</div>
+
+        <div class="label">
+            CURRENT MIFFY MEMBERS
+        </div>
+
+        <div id="memberCount">
+            Loading...
+        </div>
+
+    </div>
+
+
+    <!-- NEWEST MEMBERS -->
+
+    <div class="card">
+
+        <div class="icon">🤍</div>
+
+        <div class="label">
+            3 NEWEST MIFFY MEMBERS
+        </div>
+
+        <div id="newestMembers">
+
+            <div class="loading">
+                Loading members...
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- LOCAL DATE AND TIME -->
+
+    <div class="card">
+
+        <div class="icon">📅</div>
+
+        <div class="label">
+            YOUR LOCAL DATE & TIME
+        </div>
+
+        <div id="day">
+            --
+        </div>
+
+        <div id="month">
+            Loading...
+        </div>
+
+        <div id="weekday">
+            --
+        </div>
+
+        <div id="time">
+            --
+        </div>
+
+        <div id="timezone">
+            --
+        </div>
+
+    </div>
+
+
+    <div style="
+        text-align:center;
+        color:#ad9e99;
+        font-size:11px;
+        padding:10px;
+    ">
+        𓆝 𓆟 𓆞 🤍 𓆝 𓆟 𓆞
+    </div>
+
+</div>
+
+
+<script>
+
+/*
+==================================================
+MIFFY CLUB
+==================================================
+
+This always loads information for:
+
+https://www.chess.com/club/miffy-1
+
+So the page can be embedded in another club
+and it will still show Miffy Club information.
+*/
+
+const MIFFY_CLUB = "miffy-1";
+
+
+/*
+==================================================
+JSONP REQUEST
+==================================================
+*/
+
+function requestJSONP(url, callback) {
+
+    const callbackName =
+        "miffyTest_" +
+        Date.now() +
+        "_" +
+        Math.random()
+            .toString(36)
+            .substring(2);
+
+    const script =
+        document.createElement("script");
+
+
+    window[callbackName] =
+        function(data) {
+
+            try {
+
+                callback(data);
+
+            } finally {
+
+                try {
+                    delete window[callbackName];
+                } catch (error) {
+                    window[callbackName] = undefined;
+                }
+
+                script.remove();
+            }
+        };
+
+
+    script.onerror =
+        function() {
+
+            try {
+                delete window[callbackName];
+            } catch (error) {
+                window[callbackName] = undefined;
+            }
+
+            script.remove();
+
+            callback(null);
+        };
+
+
+    script.src =
+        url +
+        "?callback=" +
+        encodeURIComponent(callbackName);
+
+
+    document.body.appendChild(script);
+}
+
+
+/*
+==================================================
+MEMBER COUNT
+==================================================
+*/
+
+function loadMemberCount() {
+
+    requestJSONP(
+
+        "https://api.chess.com/pub/club/" +
+        MIFFY_CLUB,
+
+        function(club) {
+
+            const element =
+                document.getElementById(
+                    "memberCount"
+                );
+
+
+            if (
+                club &&
+                typeof club.members_count !==
+                "undefined"
+            ) {
+
+                const count =
+                    Number(
+                        club.members_count
+                    );
+
+
+                if (
+                    Number.isFinite(count)
+                ) {
+
+                    element.textContent =
+                        "✨ " +
+                        count.toLocaleString() +
+                        " Members ✨";
+
+                    return;
+                }
+            }
+
+
+            element.textContent =
+                "Unable to load";
+        }
+    );
+}
+
+
+/*
+==================================================
+3 NEWEST MEMBERS
+==================================================
+*/
+
+function loadNewestMembers() {
+
+    requestJSONP(
+
+        "https://api.chess.com/pub/club/" +
+        MIFFY_CLUB +
+        "/members",
+
+        function(data) {
+
+            const container =
+                document.getElementById(
+                    "newestMembers"
+                );
+
+
+            if (!data) {
+
+                container.innerHTML =
+                    '<div class="loading">' +
+                    'Member data unavailable.' +
+                    '</div>';
+
+                return;
+            }
+
+
+            const members = [];
+
+
+            /*
+             * Chess.com groups club members
+             * by activity frequency.
+             */
+
+            [
+                "weekly",
+                "monthly",
+                "all_time"
+            ].forEach(
+                function(group) {
+
+                    if (
+                        Array.isArray(
+                            data[group]
+                        )
+                    ) {
+
+                        data[group].forEach(
+                            function(member) {
+
+                                if (
+                                    member &&
+                                    member.username
+                                ) {
+
+                                    members.push(
+                                        member
+                                    );
+                                }
+
+                            }
+                        );
+                    }
+
+                }
+            );
+
+
+            /*
+             * Remove duplicate usernames.
+             */
+
+            const seen =
+                new Set();
+
+            const unique =
+                members.filter(
+                    function(member) {
+
+                        const username =
+                            String(
+                                member.username
+                            );
+
+                        const key =
+                            username.toLowerCase();
+
+
+                        if (
+                            seen.has(key)
+                        ) {
+
+                            return false;
+                        }
+
+
+                        seen.add(key);
+
+                        return true;
+                    }
+                );
+
+
+            /*
+             * Newest join timestamp first.
+             */
+
+            unique.sort(
+                function(a, b) {
+
+                    return (
+                        Number(
+                            b.joined || 0
+                        ) -
+                        Number(
+                            a.joined || 0
+                        )
+                    );
+
+                }
+            );
+
+
+            /*
+             * Only display three.
+             */
+
+            const newest =
+                unique.slice(0, 3);
+
+
+            if (!newest.length) {
+
+                container.innerHTML =
+                    '<div class="loading">' +
+                    'No member data available.' +
+                    '</div>';
+
+                return;
+            }
+
+
+            container.innerHTML =
+                newest.map(
+                    function(member) {
+
+                        const username =
+                            String(
+                                member.username
+                            );
+
+
+                        let date = "";
+
+
+                        if (member.joined) {
+
+                            date =
+                                new Date(
+                                    Number(
+                                        member.joined
+                                    ) * 1000
+                                ).toLocaleDateString(
+                                    undefined,
+                                    {
+                                        month: "short",
+                                        day: "numeric",
+                                        year: "numeric"
+                                    }
+                                );
+                        }
+
+
+                        return `
+                            <div class="member">
+
+                                🤍
+
+                                <a
+                                    href="https://www.chess.com/member/${encodeURIComponent(username)}"
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+
+                                    ${escapeHTML(username)}
+
+                                </a>
+
+                                ${
+                                    date
+                                    ? `
+                                        <span class="member-date">
+                                            ${date}
+                                        </span>
+                                      `
+                                    : ""
+                                }
+
+                            </div>
+                        `;
+
+                    }
+                ).join("");
+
+        }
+    );
+}
+
+
+/*
+==================================================
+VISITOR'S LOCAL DATE AND TIME
+==================================================
+*/
+
+function updateLocalTime() {
+
+    const now =
+        new Date();
+
+
+    document.getElementById(
+        "day"
+    ).textContent =
+        now.getDate();
+
+
+    document.getElementById(
+        "month"
+    ).textContent =
+        now.toLocaleDateString(
+            undefined,
+            {
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+
+    document.getElementById(
+        "weekday"
+    ).textContent =
+        now.toLocaleDateString(
+            undefined,
+            {
+                weekday: "long"
+            }
+        );
+
+
+    document.getElementById(
+        "time"
+    ).textContent =
+        now.toLocaleTimeString(
+            undefined,
+            {
+                hour: "numeric",
+                minute: "2-digit",
+                second: "2-digit"
+            }
+        );
+
+
+    try {
+
+        document.getElementById(
+            "timezone"
+        ).textContent =
+            "YOUR LOCAL TIME • " +
+            Intl.DateTimeFormat()
+                .resolvedOptions()
+                .timeZone;
+
+    } catch (error) {
+
+        document.getElementById(
+            "timezone"
+        ).textContent =
+            "YOUR LOCAL TIME";
+    }
+}
+
+
+/*
+==================================================
+ESCAPE USERNAME
+==================================================
+*/
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/*
+==================================================
+START
+==================================================
+*/
+
+loadMemberCount();
+
+loadNewestMembers();
+
+updateLocalTime();
+
+
+/*
+Local clock updates every second.
+*/
+
+setInterval(
+    updateLocalTime,
+    1000
+);
+
+
+/*
+Chess.com data refresh attempt every
+five minutes.
+
+The PubAPI itself may cache responses,
+so this cannot guarantee instant changes.
+*/
+
+setInterval(
+    loadMemberCount,
+    5 * 60 * 1000
+);
+
+setInterval(
+    loadNewestMembers,
+    5 * 60 * 1000
+);
+
+</script>
+
+</body>
+</html>
